@@ -1,0 +1,286 @@
+﻿<!doctype html><html><head><meta charset="utf-8"><title>Master Plan</title>
+<style>
+@page{size:A2 portrait;margin:8mm}
+body{margin:0;background:#fff;color:#22231f;font-family:Arial,sans-serif;font-size:11px}
+.hdr{display:flex;justify-content:space-between;align-items:flex-end;border-bottom:3px double #9a7b3c;padding:2px 0 6px;margin-bottom:8px}
+h1{font-family:Georgia,serif;font-weight:normal;font-size:30px;letter-spacing:3px;margin:0;color:#2a2a26}
+h1 b{color:#9a7b3c;font-weight:normal}
+.sub{color:#666;font-size:11px;margin-top:3px}
+.wrap{display:flex;gap:12px}
+#plan{width:270mm;height:470mm;background:#efe9da;border:1px solid #cfc6ae}
+.side{flex:1}
+.side h3{font-family:Georgia,serif;font-weight:normal;color:#9a7b3c;font-size:16px;margin:10px 0 4px;border-bottom:1px solid #e0d5b8;letter-spacing:1px}
+table{border-collapse:collapse;width:100%}
+td,th{border-bottom:1px solid #e6e0cf;padding:3px 4px;text-align:right}
+td:first-child,th:first-child{text-align:left}
+th{color:#7a6a45;font-weight:normal;font-size:10px;text-transform:uppercase;letter-spacing:1px}
+.tot td{font-weight:bold;border-top:1.5px solid #9a7b3c}
+.sw{display:inline-block;width:11px;height:11px;border-radius:2px;vertical-align:-1px;margin-right:5px;border:1px solid rgba(0,0,0,.25)}
+ol{margin:2px 0 0 16px;padding:0}
+li{margin-bottom:2px}
+.note{color:#777;font-size:9.5px;margin-top:6px}
+.big{font-size:20px;font-family:Georgia,serif;color:#9a7b3c}
+</style></head><body>
+<div class="hdr"><div><h1>MASTER PLAN · <b>THE UNIVERSITY ESTATE</b></h1>
+<div class="sub">Premium gated plotted township with an integrated 25-acre university · Jot Sadruddin + Jot Dariya, Teh. Pahari, Distt. Deeg, Rajasthan · Concept master plan v2 · 24 Oct 2026</div></div>
+<div class="sub" style="text-align:right">Gross site 28.40 ha / 70.2 acres<br>Traced from the BhuNaksha cadastral map · UTM 43N</div></div>
+<div class="wrap">
+<svg id="plan" xmlns="http://www.w3.org/2000/svg"></svg>
+<div class="side">
+<h3>Site statement</h3>
+<table><tr><td>Gross site</td><td><span class="big">28.40 ha</span><br>70.2 acres</td></tr>
+<tr><td>University campus (by others)</td><td id="uniA"></td></tr>
+<tr><td><b>Township, net of university</b></td><td id="netA"></td></tr></table>
+<h3>Township land use (net of university)</h3>
+<table id="lu"><tr><th>Use</th><th>ha</th><th>sq yd</th><th>%</th><th>Target</th></tr></table>
+<h3>Plot schedule</h3>
+<table id="ps"><tr><th>Type</th><th>Size</th><th>Nos</th><th>sq yd</th></tr></table>
+<h3>Legend and areas</h3>
+<table id="zones"><tr><th>Zone</th><th>ha</th><th>sq yd</th></tr></table>
+<h3>Key moves (from the precedent study)</h3>
+<ol>
+<li><b>Arrival sequence:</b> a gateway plaza with a fountain, then a palm-lined 100 ft boulevard with high-street shops, then a landmark roundabout. Precedent: Prince Gates, Kingsville.</li>
+<li><b>Two addresses from one gate:</b> the university and the gated residential enclave branch off the same roundabout, so campus traffic never enters the homes. Precedent: DLF Garden City institutional sector, Educomp Raffles.</li>
+<li><b>Green spine:</b> a continuous 20 m greenway runs the length of the enclave, and the 500 and 400 sq yd plots back onto it. Precedent: Myscape, Springfield, Radburn.</li><li><b>Plot gradient:</b> the larger 500 and 400 sq yd plots are on the west, facing the campus and the hill range. The 250 sq yd courtyard plots are on the east and suit faculty rentals.</li>
+<li><b>Central park, lake and clubhouse at the heart</b>, with park-facing plots on both sides. Precedent: Sanctuary Villas, Sattva.</li>
+<li><b>60 ft tree-lined main avenue</b> and quiet 40 ft streets with short blocks. Every plot faces east or west.</li>
+<li><b>Perimeter woodland belt</b> with a jogging and cycling trail, plus themed gardens and a fruit tree on every plot. Precedent: Godrej Orchard Estate, Tangled Up in Green.</li>
+<li><b>Utilities:</b> underground services, a sewage treatment plant and rainwater recharge pits in the greenway.</li>
+</ol>
+<div class="note">Concept stage. Plots are laid out at full size (500 sq yd = 50 × 90 ft; 400 sq yd = 40 × 90 ft; 250 sq yd = 30 × 75 ft) and counted. The 30/30/40 mix is by number of plots. Every other area is measured from the plan at 0.5 m per pixel and scaled to the 28.40 ha traced site area. The campus layout is indicative only. Before approval, verify against the current Rajasthan township rules, a DGPS survey and the land-conversion order.</div>
+</div></div>
+<script>
+// ---------- geometry ----------
+const Praw=[[699606.75,3061125.50],[699714.25,3061105.00],[699671.25,3061010.00],[699608.25,3060851.00],[699676.25,3060822.50],[699745.25,3060804.00],[699715.75,3060745.50],[699691.25,3060669.50],[699691.25,3060653.50],[699641.25,3060551.50],[699747.25,3060520.50],[699734.75,3060470.00],[699726.25,3060470.00],[699721.25,3060463.00],[699657.75,3060342.00],[699658.75,3060337.00],[699684.25,3060324.50],[699667.75,3060297.50],[699651.75,3060303.00],[699641.25,3060285.50],[699641.75,3060279.00],[699653.25,3060274.00],[699592.25,3060149.00],[699467.75,3060237.50],[699337.75,3060320.50],[699300.25,3060356.00],[699232.25,3060447.50],[699194.25,3060485.00],[699248.75,3060598.00],[699271.25,3060593.50],[699317.25,3060681.50],[699383.25,3060864.00],[699412.75,3060922.00],[699416.25,3060926.00],[699498.75,3060895.50],[699538.75,3060996.50]];
+const P=Praw.map(([x,y])=>[x-699164,3061155.75-y]);           // local metres, y down (north up)
+const TH=17*Math.PI/180, CU=Math.cos(TH), SU=Math.sin(TH), B0=[390,285];
+const xy=(u,v)=>[B0[0]+u*CU-v*SU, B0[1]+u*SU+v*CU];
+const toUV=([x,y])=>{const dx=x-B0[0],dy=y-B0[1]; return [dx*CU+dy*SU,-dx*SU+dy*CU];};
+const Q=P.map(toUV);
+const R=(u0,u1,v0,v1)=>[[u0,v0],[u1,v0],[u1,v1],[u0,v1]];
+const areaPoly=pts=>{let a=0;for(let i=0;i<pts.length;i++){const p=pts[i],q=pts[(i+1)%pts.length];a+=p[0]*q[1]-q[0]*p[1];}return Math.abs(a)/2;};
+const clipHalf=(pts,f)=>{const o=[];for(let i=0;i<pts.length;i++){const p=pts[i],q=pts[(i+1)%pts.length],fp=f(p),fq=f(q);if(fp>=0)o.push(p);if((fp>=0)!==(fq>=0)){const t=fp/(fp-fq);o.push([p[0]+t*(q[0]-p[0]),p[1]+t*(q[1]-p[1])]);}}return o;};
+const inPoly=(pt,pts)=>{let c=false;for(let i=0,j=pts.length-1;i<pts.length;j=i++){const a=pts[i],b=pts[j];if(((a[1]>pt[1])!==(b[1]>pt[1]))&&(pt[0]<(b[0]-a[0])*(pt[1]-a[1])/(b[1]-a[1])+a[0]))c=!c;}return c;};
+const segD=(p,a,b)=>{const dx=b[0]-a[0],dy=b[1]-a[1];let t=((p[0]-a[0])*dx+(p[1]-a[1])*dy)/(dx*dx+dy*dy);t=Math.max(0,Math.min(1,t));return Math.hypot(p[0]-a[0]-t*dx,p[1]-a[1]-t*dy);};
+const edgeDist=pt=>{let m=1e9;for(let i=0;i<Q.length;i++)m=Math.min(m,segD(pt,Q[i],Q[(i+1)%Q.length]));return m;};
+const SITE_HA=28.40, POLY_HA=areaPoly(Q)/1e4, K=SITE_HA/POLY_HA;
+
+// ---------- university: 25 acres west of u = uS, body only (v > -16) ----------
+const UNI_HA=25*0.40468564;
+const uniPoly=us=>clipHalf(clipHalf(Q,p=>us-p[0]),p=>p[1]+16);
+let lo=-150,hi=150; for(let i=0;i<60;i++){const m=(lo+hi)/2; if(areaPoly(uniPoly(m))/1e4*K<UNI_HA)lo=m;else hi=m;} const uS=(lo+hi)/2;
+const UNI=uniPoly(uS);
+
+// ---------- layout parameters ----------
+const PD=27.43, D25=22.86, F4=12.19, F25=9.14, F5=15.24, F75=22.86, W60=18.3, W40=12.2, W100=30.5, SPW=20, BELT=6;
+let u=uS; const col={}; const seq=[['A',PD],['R1',W60],['B',PD],['SP',SPW],['C',PD],['R2',W40],['D',PD],['E',PD],['R3',W40],['F',D25],['G',D25],['R4',W40],['H',D25]];
+seq.forEach(([k,w])=>{col[k]=[u,u+w];u+=w;}); const uEnd=u+40;
+const cross=[10,165,301,437,568];             // cross-street centrelines (v)
+const PARK=[301+W40/2, 437-W40/2];            // central park v-range (rows B..C)
+const vSouth=720;
+// ---------- layer list ----------
+const L=[]; const poly=(z,pts,o={})=>L.push(Object.assign({z,pts,closed:true},o)); const line=(z,pts,w,o={})=>L.push(Object.assign({z,pts,w,closed:false},o));
+// arm geometry (gate -> roundabout)
+const RB=[ (col.R1[0]+col.R1[1])/2, -2 ];      // roundabout centre aligned with 60 ft avenue
+const blvd=[[30,-285],[16,-170],[8,-80],[RB[0]-6,-30],RB];
+// zones
+poly('uni',UNI);
+poly('com',clipHalf(clipHalf(Q,p=>-(p[1]+250)<0?1:-1),p=>(-118-p[1])));   // arm band v in [-250,-118]
+poly('hlth',clipHalf(clipHalf(clipHalf(Q,p=>p[1]+118),p=>-p[1]-16),p=>8-p[0])); // arm rear west
+poly('arr',clipHalf(clipHalf(clipHalf(Q,p=>p[1]+118),p=>-p[1]-14),p=>p[0]-8));  // arm rear east: arrival park + sales gallery
+poly('gate',clipHalf(Q,p=>-(p[1]+250)));
+// residential greens
+poly('park',R(col.B[0],col.C[1],PARK[0],PARK[1]));
+for(let i=0;i<cross.length-1;i++){ poly('spine',R(col.SP[0],col.SP[1],cross[i]+W40/2,cross[i+1]-W40/2)); }
+poly('spine',R(col.SP[0],col.SP[1],cross[cross.length-1]+W40/2,vSouth));
+// roads
+const roads=[];
+line('road',[[col.R1[0]+W60/2,RB[1]],[col.R1[0]+W60/2,vSouth]],W60,{kind:'60'});
+line('road',[[(col.R2[0]+col.R2[1])/2,cross[0]],[(col.R2[0]+col.R2[1])/2,vSouth]],W40,{kind:'40'});
+line('road',[[(col.R3[0]+col.R3[1])/2,cross[2]-W40/2],[(col.R3[0]+col.R3[1])/2,vSouth]],W40,{kind:'40'});
+line('road',[[(col.R4[0]+col.R4[1])/2,cross[2]-W40/2],[(col.R4[0]+col.R4[1])/2,vSouth]],W40,{kind:'40'});
+cross.forEach(v=>line('road',[[col.R1[0],v],[uEnd,v]],W40,{kind:'40'}));
+line('road',[[col.R2[0],cross[1]],[col.R3[1]+30,cross[1]]],W40,{kind:'40'});
+line('road',blvd,W100,{kind:'100'});
+L.push({z:'road',circle:[RB,26]});
+// belt (woodland) along east + south edges of the township: stroke whole outline, clipped later
+line('belt',[...Q,Q[0]],BELT*2);
+// ---------- plots ----------
+const plots=[];
+const okPt=p=>inPoly(p,Q)&&edgeDist(p)>=BELT-0.01&&p[0]>=uS-0.01;
+const rowPlots=(c,front,v0,v1,type,depth)=>{const w={'250':F25,'400':F4,'500':F5,'750':F75}[type]||F5; const c1=depth?c[0]+depth:c[1]; for(let v=v0; v+w<=v1+0.01; v+=w){const r=R(c[0],c1,v,v+w); if(r.every(okPt))plots.push({r,type,front});}};
+const bands=[]; for(let i=0;i<cross.length;i++){bands.push([cross[i]+W40/2, i+1<cross.length?cross[i+1]-W40/2:vSouth]);}
+bands.forEach(([v0,v1],bi)=>{
+  const T=window.MIX||{A:'500',B:'500',C:'500',D01:'400',D:'400',E:'400'};
+  rowPlots(col.A,'E',v0,v1,T.A);
+  if(!(bi===2)){ rowPlots(col.B,'W',v0,v1,T.B); rowPlots(col.C,'E',v0,v1,T.C); }
+  if(bi>=2){ rowPlots(col.D,'W',v0,v1,T.D); rowPlots(col.E,'E',v0,v1,T.E); rowPlots(col.F,'W',v0,v1,'250'); rowPlots(col.G,'E',v0,v1,'250'); rowPlots(col.H,'W',v0,v1,'250'); }
+  else { rowPlots(col.D,'W',v0,v1,T.D01); }
+});
+// band 0/1: east rows only where the site is wide enough (okPt handles it)
+plots.forEach(p=>poly('plot',p.r));
+// clubhouse + lake inside park
+const CLUB=R(col.B[0]+8,col.C[1]-8,PARK[0]+8,PARK[0]+44);
+poly('club',CLUB);
+// ---------- raster area accounting ----------
+const S=2,U0=-260,V0=-300,CW=(320+260)*S,CH=(760+300)*S;
+const cv=document.createElement('canvas');cv.width=CW;cv.height=CH;const g=cv.getContext('2d');g.imageSmoothingEnabled=false;
+const keys=['base','uni','com','hlth','arr','gate','park','spine','road','belt','plot','club'];
+const pal=keys.map((k,i)=>[20+i*19,240-i*17,(i*53)%256]);
+const P2=(pts,closed)=>{const p=new Path2D();pts.forEach((q,i)=>i?p.lineTo((q[0]-U0)*S,(q[1]-V0)*S):p.moveTo((q[0]-U0)*S,(q[1]-V0)*S));if(closed)p.closePath();return p;};
+g.fillStyle='#fff';g.fillRect(0,0,CW,CH);g.save();g.clip(P2(Q,true));
+const rgb=k=>{const c=pal[keys.indexOf(k)];return `rgb(${c[0]},${c[1]},${c[2]})`;};
+g.fillStyle=rgb('base');g.fillRect(0,0,CW,CH);
+const order=['uni','com','hlth','arr','gate','park','spine','belt','road','plot','club'];
+order.forEach(z=>L.filter(l=>l.z===z).forEach(l=>{
+  if(z==='belt'){ g.save(); g.clip(P2(UNI,true)); g.restore(); }
+  if(l.circle){g.fillStyle=rgb(z);g.beginPath();g.arc((l.circle[0][0]-U0)*S,(l.circle[0][1]-V0)*S,l.circle[1]*S,0,7);g.fill();return;}
+  const p=P2(l.pts,l.closed); if(l.closed){g.fillStyle=rgb(z);g.fill(p);} else {g.strokeStyle=rgb(z);g.lineWidth=l.w*S;g.lineJoin='round';g.stroke(p);} }));
+// university keeps its own edge: repaint uni over belt
+g.fillStyle=rgb('uni'); L.filter(l=>l.z==='uni').forEach(l=>g.fill(P2(l.pts,true)));
+// roundabout over uni edge
+L.filter(l=>l.circle).forEach(l=>{g.fillStyle=rgb('road');g.beginPath();g.arc((l.circle[0][0]-U0)*S,(l.circle[0][1]-V0)*S,l.circle[1]*S,0,7);g.fill();});
+g.restore();
+const d=g.getImageData(0,0,CW,CH).data;const cnt={};keys.forEach(k=>cnt[k]=0);
+for(let i=0;i<d.length;i+=4){if(d[i]===255&&d[i+1]===255&&d[i+2]===255)continue;let bi=-1,bd=1e9;pal.forEach((c,j)=>{const e=(c[0]-d[i])**2+(c[1]-d[i+1])**2+(c[2]-d[i+2])**2;if(e<bd){bd=e;bi=j;}});if(bd<1200)cnt[keys[bi]]++;}
+let tot=0;keys.forEach(k=>tot+=cnt[k]);const ha={};keys.forEach(k=>ha[k]=cnt[k]/tot*SITE_HA);
+// exact plot area from geometry
+const n250=plots.filter(p=>p.type==='250').length, n400=plots.filter(p=>p.type==='400').length, n500=plots.filter(p=>p.type==='500').length, n750=0, n833=0;
+const plotHa=(n250*F25*D25+n400*F4*PD+n500*F5*PD)/1e4*K;
+const NET=SITE_HA-ha.uni;
+const cat={'Residential plots':plotHa,
+ 'Roads and circulation':ha.road+ha.gate,
+ 'Parks, green and landscape':ha.park+ha.spine+ha.belt+ha.base+(ha.plot-plotHa),
+ 'Commercial / health / club':ha.com+ha.hlth+ha.club+ha.arr};
+window.__R={uS,ha,cat,n250,n400,n500,plotHa,NET};
+// ---------- tables ----------
+const sy=h=>Math.round(h*1e4/0.83613).toLocaleString('en-IN');
+document.getElementById('uniA').innerHTML=`${ha.uni.toFixed(2)} ha · ${(ha.uni/0.40468564).toFixed(1)} acres`;
+document.getElementById('netA').innerHTML=`<b>${NET.toFixed(2)} ha · ${(NET/0.40468564).toFixed(1)} acres</b>`;
+const tg={'Residential plots':50,'Roads and circulation':25,'Parks, green and landscape':15,'Commercial / health / club':10};
+const lu=document.getElementById('lu');Object.keys(cat).forEach(c=>lu.insertAdjacentHTML('beforeend',`<tr><td>${c}</td><td>${cat[c].toFixed(2)}</td><td>${sy(cat[c])}</td><td>${(cat[c]/NET*100).toFixed(1)}%</td><td>${tg[c]}%</td></tr>`));
+lu.insertAdjacentHTML('beforeend',`<tr class="tot"><td>Township total</td><td>${NET.toFixed(2)}</td><td>${sy(NET)}</td><td>100%</td><td>100%</td></tr>`);
+const NP=n250+n400+n500, pcN=n=>(n/NP*100).toFixed(0)+'%';
+document.getElementById('ps').insertAdjacentHTML('beforeend',`<tr><td>Hill-view plots (west rows)</td><td>500 sq yd · 50×90 ft</td><td>${n500} (${pcN(n500)})</td><td>${(n500*500).toLocaleString('en-IN')}</td></tr><tr><td>Garden plots (west and central rows)</td><td>400 sq yd · 40×90 ft</td><td>${n400} (${pcN(n400)})</td><td>${(n400*400).toLocaleString('en-IN')}</td></tr><tr><td>Courtyard plots (east rows)</td><td>250 sq yd · 30×75 ft</td><td>${n250} (${pcN(n250)})</td><td>${(n250*250).toLocaleString('en-IN')}</td></tr><tr class="tot"><td>Total</td><td>target mix 30 / 30 / 40</td><td>${NP}</td><td>${(n250*250+n400*400+n500*500).toLocaleString('en-IN')}</td></tr>`);// ---------- SVG render ----------
+const NS='http://www.w3.org/2000/svg',svg=document.getElementById('plan');
+const el=(t,a,txt,par)=>{const e=document.createElementNS(NS,t);for(const k in a)e.setAttribute(k,a[k]);if(txt!=null)e.textContent=txt;(par||svg).appendChild(e);return e;};
+const X=pts=>pts.map(p=>xy(p[0],p[1]));
+const dP=(pts,closed)=>'M'+X(pts).map(p=>p[0].toFixed(2)+' '+p[1].toFixed(2)).join(' L')+(closed?' Z':'');
+svg.setAttribute('viewBox','-55 -75 700 1120');
+const defs=el('defs',{});
+defs.innerHTML=`
+<clipPath id="site"><path d="${dP(Q,true)}"/></clipPath>
+<filter id="sh" x="-20%" y="-20%" width="140%" height="140%"><feDropShadow dx="1.2" dy="1.6" stdDeviation="1" flood-color="#2b3a1f" flood-opacity=".35"/></filter>
+<filter id="bsh" x="-20%" y="-20%" width="140%" height="140%"><feDropShadow dx="1.5" dy="2" stdDeviation="1.2" flood-color="#000" flood-opacity=".35"/></filter>
+<radialGradient id="tree"><stop offset="0" stop-color="#7fb069"/><stop offset=".7" stop-color="#4f8a3c"/><stop offset="1" stop-color="#2f5f2a"/></radialGradient>
+<radialGradient id="tree2"><stop offset="0" stop-color="#a3c46c"/><stop offset=".7" stop-color="#6a9a45"/><stop offset="1" stop-color="#3d6b2c"/></radialGradient>
+<linearGradient id="water" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#9fd3e6"/><stop offset="1" stop-color="#4e9fc2"/></linearGradient>
+<pattern id="lawn" width="6" height="6" patternUnits="userSpaceOnUse"><rect width="6" height="6" fill="#b7d48f"/><circle cx="1.5" cy="1.5" r=".5" fill="#a6c77e"/><circle cx="4.5" cy="4" r=".5" fill="#c4dc9f"/></pattern>
+<pattern id="wood" width="10" height="10" patternUnits="userSpaceOnUse"><rect width="10" height="10" fill="#8fb874"/></pattern>
+<pattern id="paving" width="4" height="4" patternUnits="userSpaceOnUse"><rect width="4" height="4" fill="#e8dcc0"/><path d="M0 0H4M0 0V4" stroke="#d8c9a6" stroke-width=".3"/></pattern>
+<marker id="ah" viewBox="0 0 10 10" refX="5" refY="5" markerWidth="5" markerHeight="5" orient="auto"><path d="M0,0 L10,5 L0,10 z" fill="#5a4a2a"/></marker>`;
+// context: faint cadastral
+el('image',{href:'joint_parcel.png',x:0,y:0,width:613.5,height:1037,opacity:.22});
+const G=el('g',{'clip-path':'url(#site)'});
+el('path',{d:dP(Q,true),fill:'#cfe0b0'},null,G);                 // base landscape
+const FILL={uni:'#e4dccb',com:'#f0d9c4',hlth:'#f3d6dc',arr:'#f0d9c4',gate:'url(#paving)',park:'url(#lawn)',spine:'url(#lawn)'};
+['uni','com','hlth','arr','gate','park','spine'].forEach(z=>L.filter(l=>l.z===z).forEach(l=>el('path',{d:dP(l.pts,true),fill:FILL[z]},null,G)));
+// belt woodland
+el('path',{d:dP([...Q,Q[0]],false),fill:'none',stroke:'#7faa62','stroke-width':BELT*2},null,G);
+// university repaint & campus
+el('path',{d:dP(UNI,true),fill:'#e4dccb'},null,G);
+// roads
+const roadLines=L.filter(l=>l.z==='road'&&!l.circle);
+roadLines.forEach(l=>el('path',{d:dP(l.pts,false),fill:'none',stroke:'#d9d3c3','stroke-width':l.w+2.4,'stroke-linejoin':'round'},null,G)); // footpath edge
+roadLines.forEach(l=>el('path',{d:dP(l.pts,false),fill:'none',stroke:l.kind==='100'?'#6f6e6a':l.kind==='60'?'#85837d':'#a29f97','stroke-width':l.w-2,'stroke-linejoin':'round'},null,G));
+// roundabout
+const rb=xy(...RB); el('circle',{cx:rb[0],cy:rb[1],r:27.2,fill:'#d9d3c3'},null,G); el('circle',{cx:rb[0],cy:rb[1],r:25,fill:'#6f6e6a'},null,G);
+el('circle',{cx:rb[0],cy:rb[1],r:13,fill:'url(#lawn)',stroke:'#e8dcc0','stroke-width':1.5},null,G); el('circle',{cx:rb[0],cy:rb[1],r:4,fill:'#c9a85a',filter:'url(#bsh)'},null,G);
+// boulevard median + centre dashes
+el('path',{d:dP(blvd,false),fill:'none',stroke:'#7fb069','stroke-width':6,'stroke-linejoin':'round'},null,G);
+roadLines.filter(l=>l.kind!=='100').forEach(l=>el('path',{d:dP(l.pts,false),fill:'none',stroke:'#f4f1e8','stroke-width':.4,'stroke-dasharray':'4 4'},null,G));
+// plots
+plots.forEach((p,i)=>{
+  el('path',{d:dP(p.r,true),fill:p.type==='500'?'#efd9a6':p.type==='400'?'#f5e5bd':'#faf1dc',stroke:'#b9a676','stroke-width':.45},null,G);
+  // indicative villa footprint with setbacks: front 6, rear 4, side 2
+  const [u0,v0]=p.r[0],[u1,,]=[p.r[1][0]],v1=p.r[2][1];
+  const u1b=p.r[1][0]; const fr=p.front==='E'?[u0+4,u1b-6]:[u0+6,Math.min(u1b-4,u0+30)];
+  el('path',{d:dP(R(fr[0],fr[1],v0+2.2,v1-2.2),true),fill:'#fffaf0',stroke:'#c9b88c','stroke-width':.35,filter:'url(#bsh)'},null,G);
+});
+// numbering
+plots.forEach((p,i)=>{const c=xy((p.r[0][0]+p.r[1][0])/2,(p.r[0][1]+p.r[2][1])/2); el('text',{x:c[0],y:c[1]+1.3,'font-size':3.6,'text-anchor':'middle',fill:'#8a7748',transform:`rotate(17 ${c[0]} ${c[1]})`},String(i+1),G);});
+// central park: lake, clubhouse, pool
+const pk=(a,b)=>xy(a,b);
+const lake=[[col.B[0]+14,PARK[0]+70],[col.SP[0]+5,PARK[0]+56],[col.C[0]+10,PARK[0]+60],[col.C[1]-10,PARK[0]+80],[col.C[0]+6,PARK[1]-14],[col.B[0]+30,PARK[1]-10],[col.B[0]+10,PARK[0]+100]];
+const lk=X(lake); let ld=`M${lk[0][0]} ${lk[0][1]}`; for(let i=0;i<lk.length;i++){const a=lk[i],b=lk[(i+1)%lk.length];ld+=` Q${a[0]} ${a[1]} ${(a[0]+b[0])/2} ${(a[1]+b[1])/2}`;} ld+='Z';
+el('path',{d:ld,fill:'url(#water)',stroke:'#e8f4f8','stroke-width':1.2},null,G);
+el('path',{d:dP(CLUB,true),fill:'url(#paving)'},null,G);
+el('path',{d:dP(R(col.B[0]+14,col.C[1]-30,PARK[0]+12,PARK[0]+30),true),fill:'#fffaf0',stroke:'#9a7b3c','stroke-width':.8,filter:'url(#bsh)'},null,G);
+el('path',{d:dP(R(col.C[1]-27,col.C[1]-13,PARK[0]+14,PARK[0]+38),true),fill:'url(#water)',stroke:'#fff','stroke-width':.6},null,G);
+// park paths
+el('path',{d:dP([[col.B[0]+4,PARK[1]-4],[col.SP[0]+10,PARK[0]+50],[col.C[1]-4,PARK[1]-6]],false),fill:'none',stroke:'#efe5cb','stroke-width':2},null,G);
+// commercial buildings + parking along boulevard
+const armBld=(s0,s1,side)=>{for(let v=s0;v<s1;v+=26){const uC= side<0? -46+(-250-v)*0.08 : 44-(v+250)*0.06;
+  const r=side<0?R(uC,uC+24,v,v+20):R(uC-24,uC,v,v+20); if(r.every(p=>inPoly(p,Q)))el('path',{d:dP(r,true),fill:'#fff5ea',stroke:'#b48a6a','stroke-width':.5,filter:'url(#bsh)'},null,G);}};
+armBld(-244,-125,-1); armBld(-244,-125,1);
+// health building
+el('path',{d:dP(R(-48,-14,-104,-40),true),fill:'#fff',stroke:'#b34a62','stroke-width':.6,filter:'url(#bsh)'},null,G);
+// gate plaza fountain
+const gp=xy(26,-266); el('circle',{cx:gp[0],cy:gp[1],r:7,fill:'url(#water)',stroke:'#e8dcc0','stroke-width':1.5},null,G);
+// campus (indicative)
+const campus=[[R(uS-70,uS-14,30,120),'b'],[R(uS-150,uS-82,30,70),'b'],[R(uS-150,uS-82,82,120),'b'],[R(uS-130,uS-40,140,230),'q'],[R(uS-160,uS-140,140,230),'b'],[R(uS-28,uS-10,140,230),'b'],
+ [R(uS-200,uS-30,262,452),'f'],[R(uS-170,uS-120,470,520),'b'],[R(uS-110,uS-60,470,530),'b'],[R(uS-50,uS-14,470,560),'b'],[R(uS-40,uS-14,-10,20),'p']];
+campus.forEach(([r,t])=>{ if(!r.every(p=>inPoly(p,UNI)))return;
+  if(t==='b')el('path',{d:dP(r,true),fill:'#fbf7ef',stroke:'#8c7a5a','stroke-width':.6,filter:'url(#bsh)'},null,G);
+  if(t==='q')el('path',{d:dP(r,true),fill:'url(#lawn)',stroke:'#e8dcc0','stroke-width':2},null,G);
+  if(t==='p')el('path',{d:dP(r,true),fill:'url(#paving)'},null,G);
+  if(t==='f'){el('path',{d:dP(r,true),fill:'#9cc47b'},null,G); const c=xy((r[0][0]+r[1][0])/2,(r[0][1]+r[2][1])/2);
+    el('rect',{x:c[0]-38,y:c[1]-80,width:76,height:160,rx:38,fill:'#c76b4a',transform:`rotate(17 ${c[0]} ${c[1]})`},null,G);
+    el('rect',{x:c[0]-30,y:c[1]-72,width:60,height:144,rx:30,fill:'#7fb069',transform:`rotate(17 ${c[0]} ${c[1]})`},null,G);} });
+// trees
+let seed=7; const rnd=()=>{seed=(seed*16807)%2147483647;return seed/2147483647;};
+const tree=(u,v,r,alt)=>{const p=xy(u,v); el('circle',{cx:p[0],cy:p[1],r,fill:alt?'url(#tree2)':'url(#tree)',filter:'url(#sh)'},null,G);};
+for(let s=0;s<1;s+=0.025){ // boulevard rows
+  const seg=blvd; const tot2=seg.slice(1).reduce((a,p,i)=>a+Math.hypot(p[0]-seg[i][0],p[1]-seg[i][1]),0); let dd=s*tot2,k=0;
+  while(k<seg.length-2&&dd>Math.hypot(seg[k+1][0]-seg[k][0],seg[k+1][1]-seg[k][1])){dd-=Math.hypot(seg[k+1][0]-seg[k][0],seg[k+1][1]-seg[k][1]);k++;}
+  const a=seg[k],b=seg[k+1],Lk=Math.hypot(b[0]-a[0],b[1]-a[1]),t=Math.min(1,dd/Lk),px=a[0]+t*(b[0]-a[0]),py=a[1]+t*(b[1]-a[1]),nx=-(b[1]-a[1])/Lk,ny=(b[0]-a[0])/Lk;
+  if(py>-40)continue; tree(px,py,2.2,true); tree(px+nx*16.5,py+ny*16.5,3); tree(px-nx*16.5,py-ny*16.5,3);}
+for(let v=6;v<vSouth;v+=11){ [col.R1[0]-1,col.R1[1]+1].forEach(uu=>{if(okPt([uu,v])||inPoly([uu,v],Q))tree(uu,v,2.6,v%2);}); }
+for(let v=cross[0]+8;v<vSouth;v+=9){ if(v>PARK[0]-4&&v<PARK[1]+4)continue; const uu=col.SP[0]+4+rnd()*12; if(inPoly([uu,v],Q)&&edgeDist([uu,v])>3)tree(uu,v,3+rnd()*1.5,rnd()>.5);}
+for(let i=0;i<90;i++){ const uu=col.B[0]+rnd()*(col.C[1]-col.B[0]), vv=PARK[0]+46+rnd()*(PARK[1]-PARK[0]-50); if(!inPoly([uu,vv],lake))tree(uu,vv,2.5+rnd()*2,rnd()>.4);}
+// belt trees along outline (skip uni side west and arm frontage)
+for(let i=0;i<Q.length;i++){const a=Q[i],b=Q[(i+1)%Q.length],Lk=Math.hypot(b[0]-a[0],b[1]-a[1]),nx=(b[1]-a[1])/Lk,ny=-(b[0]-a[0])/Lk; for(let s=4;s<Lk;s+=8){const p=[a[0]+(b[0]-a[0])*s/Lk,a[1]+(b[1]-a[1])*s/Lk]; for(const sg of [1,-1]){const q=[p[0]+nx*3*sg,p[1]+ny*3*sg]; if(inPoly(q,Q)&&!inPoly(q,UNI)&&q[1]>-250){tree(q[0],q[1],2.6+rnd(),rnd()>.5);break;}}}}
+// campus trees
+for(let i=0;i<120;i++){const uu=uS-175+rnd()*170, vv=rnd()*590; const pnt=[uu,vv]; if(inPoly(pnt,UNI)&&edgeDist(pnt)>4&&!(vv>255&&vv<460&&uu>uS-205&&uu<uS-25)&&!(vv>25&&vv<125)&&!(vv>465&&vv<565))tree(uu,vv,2.8+rnd()*1.5,rnd()>.5);}
+// plaza trees
+for(let i=0;i<12;i++){const uu=10+rnd()*60, vv=-115+rnd()*100; if(inPoly([uu,vv],Q)&&edgeDist([uu,vv])>3)tree(uu,vv,2.6+rnd()*1.4,rnd()>.5);}
+for(let i=0;i<150;i++){const uu=156+rnd()*30, vv=22+rnd()*262; if(inPoly([uu,vv],Q)&&edgeDist([uu,vv])>4)tree(uu,vv,2+rnd()*1.2,true);}
+// outlines
+el('path',{d:dP(UNI,true),fill:'none',stroke:'#7a5c2e','stroke-width':1.6,'stroke-dasharray':'7 3'});
+el('path',{d:dP(Q,true),fill:'none',stroke:'#3d2f15','stroke-width':2.6});
+// ---------- labels ----------
+const lab=(u,v,t1,t2,sz=9,c='#2a2a26',rot=17,bold=true)=>{const p=xy(u,v);const g2=el('g',{transform:`translate(${p[0]} ${p[1]}) rotate(${rot})`});
+ el('text',{'font-size':sz,'text-anchor':'middle','font-family':'Georgia,serif','font-weight':bold?'bold':'normal',fill:c,stroke:'#fffaf0','stroke-width':sz*.32,'paint-order':'stroke','letter-spacing':sz*.08},t1,g2);
+ if(t2)el('text',{y:sz*1.05,'font-size':sz*.72,'text-anchor':'middle','font-family':'Arial',fill:c,stroke:'#fffaf0','stroke-width':sz*.25,'paint-order':'stroke'},t2,g2);};
+lab(uS-90,250,'UNIVERSITY CAMPUS',`25 acres · ${ha.uni.toFixed(2)} ha`,13,'#5b4320');
+lab(uS-90,175,'Academic quad','',7,'#5b4320',17,false); lab(uS-115,357,'Sports ground','',7,'#3d5f2a',17,false); lab(uS-80,510,'Hostels','',7,'#5b4320',17,false);
+lab(uS-28,6,'Campus gate','',6.5,'#5b4320',17,false);
+lab(-28,-190,'HIGH STREET','retail · cafés',8,'#7a3e1c',-2); lab(60,-190,'HIGH STREET','',8,'#7a3e1c',-6);
+lab(-30,-66,'HEALTHCARE','clinic',7,'#8a2440',-4); lab(44,-60,'F&B PLAZA','cafés · sales gallery',7,'#7a3e1c',-4);
+lab(28,-292,'GATEWAY PLAZA','',8,'#3d2f15',-5);
+const pc=(col.B[0]+col.C[1])/2; lab(pc,PARK[0]+24,'CLUBHOUSE','pool · spa · banquet',7.5,'#5b4320'); lab(pc,PARK[0]+92,'CENTRAL PARK + LAKE','',8,'#1d4d27');
+lab((col.SP[0]+col.SP[1])/2,90,'GREEN SPINE','',6.5,'#1d4d27',107);
+lab((col.R1[0]+col.R1[1])/2,250,'60 FT AVENUE','',5.5,'#fff',107,false);
+lab(RB[0],RB[1]-34,'LANDMARK ROUNDABOUT','',6.5,'#3d2f15');
+lab(14,-150,'100 FT BOULEVARD','',6,'#fff',-82,false);
+lab(205,612,'WOODLAND TRAIL','',6,'#1d4d27',-56,false);
+lab(170,150,'ORCHARD GARDEN','fruit trees · walking trail',7,'#1d4d27',107); lab(100,-0.5+22,'','',1); lab(-150,600,'','',1);
+lab(30,-312,'▼ ENTRY from road 1550','',8,'#3d2f15',0,true);
+// north + scale
+el('path',{d:'M600,-60 l10,30 l-10,-8 l-10,8 z',fill:'#3d2f15'}); el('text',{x:600,y:-18,'font-size':12,'text-anchor':'middle','font-family':'Georgia'},'N');
+[0,1,2,3,4].forEach(i=>el('rect',{x:-40+i*20,y:1022,width:20,height:5,fill:i%2?'#fff':'#3d2f15',stroke:'#3d2f15','stroke-width':.6}));
+el('text',{x:-40,y:1040,'font-size':8},'0'); el('text',{x:60,y:1040,'font-size':8,'text-anchor':'middle'},'100 m');
+// legend table
+const lg=[['University campus','#e4dccb',ha.uni],['Residential plots (net)','#f7ecd0',plotHa],['Roads (100/60/40 ft) + gate plaza','#85837d',ha.road+ha.gate],['Central park + green spine','#b7d48f',ha.park+ha.spine],['Woodland belt + landscape','#8fb874',ha.belt+ha.base+(ha.plot-plotHa)],['High-street commercial + F&B plaza','#f0d9c4',ha.com+ha.arr],['Healthcare','#f3d6dc',ha.hlth],['Clubhouse','#e8dcc0',ha.club]];
+const zt=document.getElementById('zones'); lg.forEach(([n,c,h])=>zt.insertAdjacentHTML('beforeend',`<tr><td><span class="sw" style="background:${c}"></span>${n}</td><td>${h.toFixed(2)}</td><td>${sy(h)}</td></tr>`));
+</script></body></html>

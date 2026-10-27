@@ -1,0 +1,88 @@
+﻿<!doctype html><html><head><meta charset="utf-8"><title>Parcel Dimension Plan</title>
+<style>
+@page{size:A3 portrait;margin:8mm}
+body{font-family:Arial,sans-serif;margin:0;color:#111;font-size:10px}
+h1{font-size:17px;margin:0}
+.sub{color:#444;margin:2px 0 6px}
+.wrap{display:flex;gap:8px}
+#plan{width:190mm;height:330mm;border:1px solid #888;background:#fff}
+.side{flex:1}
+table{border-collapse:collapse;width:100%;margin-bottom:6px}
+td,th{border:1px solid #bbb;padding:1px 4px;text-align:right}
+td:first-child,th:first-child{text-align:left}
+th{background:#eee}
+.big{font-size:16px;font-weight:bold}
+.note{color:#555;font-size:9px}
+</style></head><body>
+<h1>Proposed Land Parcel: Dimension &amp; Area Plan</h1>
+<div class="sub">Jot Sadruddin (30929) + Jot Dariya (30925), Teh. Pahari, Distt. Deeg, Rajasthan · Traced from the BhuNaksha cadastral map, 24 Oct 2026 · Coordinates UTM 43N (m)</div>
+<div class="wrap">
+<svg id="plan" xmlns="http://www.w3.org/2000/svg"></svg>
+<div class="side">
+<table><tr><th colspan="2">Area</th></tr>
+<tr><td>Total</td><td class="big">28.40 ha</td></tr>
+<tr><td>Acres</td><td>70.2</td></tr>
+<tr><td>Sq yd</td><td>3,39,650</td></tr>
+<tr><td>Sq m</td><td>2,83,990</td></tr>
+<tr><td>Bigha (pakka, 2,500 m²)*</td><td>≈ 113.6</td></tr>
+<tr><td>Jot Dariya</td><td>25.34 ha</td></tr>
+<tr><td>Jot Sadruddin</td><td>3.06 ha</td></tr></table>
+<table id="dimsT"><tr><th colspan="2">Overall dimensions</th></tr></table>
+<table id="sides"><tr><th>Side</th><th>m</th><th>ft</th></tr></table>
+<div class="note">Side lengths run clockwise from corner P1 (NW corner of the north arm, on the road).<br>
+Sides shorter than 20 m are listed here but not labelled on the plan.<br>
+* The bigha size varies locally. Check the Pahari tehsil standard.<br>
+Plot 1500 is cut along the 1496/1497 boundary, extended north to the road. 3028/1466 is left out and 1467 is included.<br>
+This is a screen-traced reference plan, not a survey. The corner coordinates are good to roughly ±2–3 m. Verify by DGPS before demarcation.</div>
+</div></div>
+<script>
+const V=[[699606.75,3061125.50],[699714.25,3061105.00],[699671.25,3061010.00],[699608.25,3060851.00],[699676.25,3060822.50],[699745.25,3060804.00],[699715.75,3060745.50],[699691.25,3060669.50],[699691.25,3060653.50],[699641.25,3060551.50],[699747.25,3060520.50],[699734.75,3060470.00],[699726.25,3060470.00],[699721.25,3060463.00],[699657.75,3060342.00],[699658.75,3060337.00],[699684.25,3060324.50],[699667.75,3060297.50],[699651.75,3060303.00],[699641.25,3060285.50],[699641.75,3060279.00],[699653.25,3060274.00],[699592.25,3060149.00],[699467.75,3060237.50],[699337.75,3060320.50],[699300.25,3060356.00],[699232.25,3060447.50],[699194.25,3060485.00],[699248.75,3060598.00],[699271.25,3060593.50],[699317.25,3060681.50],[699383.25,3060864.00],[699412.75,3060922.00],[699416.25,3060926.00],[699498.75,3060895.50],[699538.75,3060996.50]];
+const X0=699164.0, Y0=3061155.75, NS='http://www.w3.org/2000/svg';
+const P=V.map(([x,y])=>[x-X0,Y0-y]);
+const svg=document.getElementById('plan'); svg.setAttribute('viewBox','-75 -45 760 1115');
+const el=(t,a,txt)=>{const e=document.createElementNS(NS,t);for(const k in a)e.setAttribute(k,a[k]);if(txt!=null)e.textContent=txt;svg.appendChild(e);return e;};
+el('image',{href:'joint_parcel.png',x:0,y:0,width:613.5,height:1037,opacity:0.35});
+// orientation (screen coords, y down): sign of area
+let A=0; for(let i=0;i<P.length;i++){const[a,b]=P[i],[c,d]=P[(i+1)%P.length];A+=a*d-c*b;} const cw=A>0;
+el('polygon',{points:P.map(p=>p.join(',')).join(' '),fill:'rgba(255,214,0,0.28)',stroke:'#c00','stroke-width':2.2,'stroke-linejoin':'round'});
+const sides=document.getElementById('sides'); let per=0;
+P.forEach((p,i)=>{const q=P[(i+1)%P.length]; const dx=q[0]-p[0],dy=q[1]-p[1],L=Math.hypot(dx,dy); per+=L;
+  sides.insertAdjacentHTML('beforeend',`<tr><td>P${i+1}–P${(i+1)%P.length+1}</td><td>${L.toFixed(1)}</td><td>${(L*3.28084).toFixed(0)}</td></tr>`);
+  if(L<20) return;
+  let nx=dy/L,ny=-dx/L; if(!cw){nx=-nx;ny=-ny;}  // outward normal
+  const mx=(p[0]+q[0])/2+nx*11, my=(p[1]+q[1])/2+ny*11; let ang=Math.atan2(dy,dx)*180/Math.PI; if(ang>90)ang-=180; if(ang<-90)ang+=180;
+  el('text',{x:mx,y:my,'font-size':L<30?8:10,'text-anchor':'middle','dominant-baseline':'middle',transform:`rotate(${ang} ${mx} ${my})`,fill:'#000','font-weight':'bold',stroke:'#fff','stroke-width':2.5,'paint-order':'stroke'},`${L.toFixed(1)} m (${(L*3.28084).toFixed(0)} ft)`);
+});
+P.forEach((p,i)=>{el('circle',{cx:p[0],cy:p[1],r:2.2,fill:'#c00'}); el('text',{x:p[0]+4,y:p[1]-4,'font-size':7,fill:'#06c',stroke:'#fff','stroke-width':2,'paint-order':'stroke'},'P'+(i+1));});
+const xs_=P.map(p=>p[0]), ys_=P.map(p=>p[1]); const minX=Math.min(...xs_),maxX=Math.max(...xs_),minY=Math.min(...ys_),maxY=Math.max(...ys_);
+const dimLine=(p,q,label)=>{el('line',{x1:p[0],y1:p[1],x2:q[0],y2:q[1],stroke:'#333','stroke-width':1,'marker-start':'url(#ar)','marker-end':'url(#ar)'});
+  const mx=(p[0]+q[0])/2,my=(p[1]+q[1])/2; let ang=Math.atan2(q[1]-p[1],q[0]-p[0])*180/Math.PI; if(ang>90)ang-=180; if(ang<-90)ang+=180;
+  el('text',{x:mx,y:my-5,'font-size':12,'text-anchor':'middle',transform:`rotate(${ang} ${mx} ${my})`,fill:'#333','font-weight':'bold',stroke:'#fff','stroke-width':3,'paint-order':'stroke'},label);};
+const defs=el('defs',{}); defs.innerHTML='<marker id="ar" viewBox="0 0 10 10" refX="5" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0,2 L10,5 L0,8 z" fill="#333"/></marker>';
+// overall N-S and E-W extents (dashed box + dimension lines)
+el('rect',{x:minX,y:minY,width:maxX-minX,height:maxY-minY,fill:'none',stroke:'#777','stroke-dasharray':'6 4','stroke-width':0.8});
+const EW=maxX-minX, NSd=maxY-minY;
+dimLine([minX,minY-20],[maxX,minY-20],`E–W extent ${EW.toFixed(0)} m (${(EW*3.28084).toFixed(0)} ft)`);
+dimLine([maxX+22,minY],[maxX+22,maxY],`N–S extent ${NSd.toFixed(0)} m (${(NSd*3.28084).toFixed(0)} ft)`);
+const dimsT=document.getElementById('dimsT');
+function cut(t){const xs=[]; for(let i=0;i<P.length;i++){const p=P[i],q=P[(i+1)%P.length]; if((p[1]-t)*(q[1]-t)<0){const f=(t-p[1])/(q[1]-p[1]); xs.push([p[0]+f*(q[0]-p[0]),t]);}}
+  xs.sort((m,n)=>m[0]-n[0]); return xs;}
+let wy=0,wL=0; for(let t=minY+1;t<maxY;t+=1){const c=cut(t); if(c.length>=2){const L=c[c.length-1][0]-c[0][0]; if(L>wL){wL=L;wy=t;}}}
+[[minY+100,'North arm width (E–W)'],[minY+330,'Upper body width (E–W)'],[wy,'Widest (E–W)'],[minY+800,'Lower body width (E–W)']].forEach(([t,name])=>{
+  const xs=cut(t); if(xs.length<2)return; const p=xs[0],q=xs[xs.length-1],L=q[0]-p[0];
+  el('line',{x1:p[0],y1:p[1],x2:q[0],y2:q[1],stroke:'#0a5','stroke-width':1.2,'stroke-dasharray':'3 2','marker-start':'url(#ar)','marker-end':'url(#ar)'});
+  const mx=(p[0]+q[0])/2,my=(p[1]+q[1])/2; let ang=Math.atan2(q[1]-p[1],q[0]-p[0])*180/Math.PI; if(ang>90)ang-=180; if(ang<-90)ang+=180;
+  el('text',{x:mx,y:my-4,'font-size':10,'text-anchor':'middle',transform:`rotate(${ang} ${mx} ${my})`,fill:'#075','font-weight':'bold',stroke:'#fff','stroke-width':2.5,'paint-order':'stroke'},`${L.toFixed(0)} m (${(L*3.28084).toFixed(0)} ft)`);
+  dimsT.insertAdjacentHTML('beforeend',`<tr><td>${name}</td><td>${L.toFixed(0)} m / ${(L*3.28084).toFixed(0)} ft</td></tr>`);});
+dimsT.querySelector('tr').insertAdjacentHTML('afterend',`<tr><td>N–S extent</td><td>${NSd.toFixed(0)} m / ${(NSd*3.28084).toFixed(0)} ft</td></tr><tr><td>E–W extent</td><td>${EW.toFixed(0)} m / ${(EW*3.28084).toFixed(0)} ft</td></tr><tr><td>Perimeter</td><td>${per.toFixed(0)} m / ${(per*3.28084).toFixed(0)} ft</td></tr>`);
+// area label
+el('text',{x:400,y:560,'font-size':26,'text-anchor':'middle','font-weight':'bold',fill:'#a00',stroke:'#fff','stroke-width':4,'paint-order':'stroke'},'28.40 ha');
+el('text',{x:400,y:584,'font-size':14,'text-anchor':'middle',fill:'#a00',stroke:'#fff','stroke-width':3,'paint-order':'stroke'},'70.2 acres · 3,39,650 sq yd');
+el('text',{x:560,y:60,'font-size':11,'text-anchor':'middle',fill:'#333'},'JOT SADRUDDIN 3.06 ha');
+el('text',{x:260,y:395,'font-size':11,'text-anchor':'middle',fill:'#333'},'JOT DARIYA · 25.34 ha');
+// north arrow + scale bar
+el('path',{d:'M640,-30 l10,30 l-10,-8 l-10,8 z',fill:'#000'}); el('text',{x:640,y:14,'font-size':12,'text-anchor':'middle','font-weight':'bold'},'N');
+[0,1,2,3,4].forEach(i=>el('rect',{x:-60+i*25,y:1045,width:25,height:6,fill:i%2?'#fff':'#000',stroke:'#000','stroke-width':0.8}));
+el('text',{x:-60,y:1063,'font-size':9},'0'); el('text',{x:65,y:1063,'font-size':9,'text-anchor':'middle'},'125 m');
+el('text',{x:5,y:1063,'font-size':9,'text-anchor':'middle'},'50');
+</script></body></html>
