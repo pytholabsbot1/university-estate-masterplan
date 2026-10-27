@@ -22,71 +22,108 @@ const inTown=p=>inPoly(p,Q)&&!(p[0]<uS&&p[1]>VU);
 
 // ---------------- parameters ----------------
 const C=G.CFG||{};
-const BELT=C.belt??3, PD=27.43, D25=22.86, W={'500':15.24,'400':12.19,'250':9.14};
-const W60=18.29,W40=12.19,W30=9.14,W100=30.48;
+const BELT=C.belt??3, PD=27.432, D25=22.86, W={'500':15.24,'400':12.192,'250':9.144};   // exact ft -> m
+const W60=18.29,W40=12.19,W30=9.14,W100=30.48,LANE=6;
 // column sequence west->east (u widths). type: plot rows carry size + facing
 const seq=C.seq||[['A',PD,'500','E'],['R1',W60],['B',PD,'500','W'],['C',PD,'500','E'],['R2',W40],['D',PD,'400','W'],['E',PD,'400','E'],['R3',W40],['F',D25,'250','W'],['G',D25,'250','E'],['R4',W40],['H',D25,'250','W']];
 const col={};let u=uS;seq.forEach(s=>{col[s[0]]={u0:u,u1:u+s[1],t:s[2],f:s[3]};u+=s[1];});
 const VN=2;                                  // enclave starts south of the arm
-const cross=C.cross||[170,342,520];          // cross-street v (north edge of street)
-const park=C.park||{cols:["B","C"],v0:342+W40,v1:440};
-const RB={c:[(col.R1.u0+col.R1.u1)/2,-22],r:17};
+const cross=C.cross||[165,348,512];          // cross-street v (north edge of street)
+const park=C.park||{cols:["B","C"],v0:cross[1]+W40,v1:cross[1]+W40+86};
+const UC=(col.R1.u0+col.R1.u1)/2;            // arrival axis: boulevard, roundabout and 60 ft avenue share it
+const RB={c:[UC,-22],r:17};
+// inward offset of a run of boundary vertices (for roads that follow the boundary)
+const SGN=Math.sign(Q.reduce((a,p,i)=>{const q=Q[(i+1)%Q.length];return a+p[0]*q[1]-q[0]*p[1];},0));
+const offLine=(ids,d)=>{const L=[];for(let i=0;i<ids.length-1;i++){const a=Q[ids[i]],b=Q[ids[i+1]],l=Math.hypot(b[0]-a[0],b[1]-a[1]),t=[(b[0]-a[0])/l,(b[1]-a[1])/l],n=[-t[1]*SGN,t[0]*SGN];L.push({p:[a[0]+n[0]*d,a[1]+n[1]*d],t});}
+  const pts=[L[0].p];for(let i=1;i<L.length;i++){const A=L[i-1],B=L[i],den=A.t[0]*B.t[1]-A.t[1]*B.t[0],s=((B.p[0]-A.p[0])*B.t[1]-(B.p[1]-A.p[1])*B.t[0])/den;pts.push([A.p[0]+A.t[0]*s,A.p[1]+A.t[1]*s]);}
+  const z=L[L.length-1],a=Q[ids[ids.length-2]],e=Q[ids[ids.length-1]];pts.push([z.p[0]+e[0]-a[0],z.p[1]+e[1]-a[1]]);return pts;};
+const vAt=(pts,uu)=>{for(let i=0;i<pts.length-1;i++){const a=pts[i],b=pts[i+1];if((uu-a[0])*(uu-b[0])<=0)return a[1]+(uu-a[0])/(b[0]-a[0])*(b[1]-a[1]);}return null;};
 // ---------------- layout ----------------
-const out={roads:[],plots:[],zones:[],uS,UNI,Q,col,RB,cross};
-const roadRect=(u0,u1,v0,v1,kind)=>{const p=clipRect(Q,u0,u1,v0,v1);if(p.length>2)out.roads.push({pts:p,kind});};
-// vertical roads
-const vEnd=700;
-roadRect(col.R1.u0,col.R1.u1,RB.c[1],vEnd,'60');
-['R2','R3','R4'].forEach(k=>col[k]&&roadRect(col[k].u0,col[k].u1,C.vstart?.[k]??(VN+BELT),vEnd,'40'));
+const out={roads:[],plots:[],zones:[],uS,UNI,Q,col,RB,cross,UC};
+const addRoad=(p,kind)=>{if(p.length>2)out.roads.push({pts:p,kind});return p;};
+const roadRect=(u0,u1,v0,v1,kind)=>addRoad(clipRect(Q,u0,u1,v0,v1),kind);
+// south loop: 40 ft road along the south boundary ties the ends of every north-south road together
+const SL=[22,23,24],slIn=offLine(SL,BELT),slOut=offLine(SL,BELT+W40),slMid=offLine(SL,BELT+W40/2);
+out.loopV=u=>vAt(slMid,u);out.loop=addRoad(clipHalf(clipHalf([...slIn,...slOut.reverse()],p=>p[0]-col.R1.u0),p=>col.R4.u1-p[0]),'40');
+// vertical road from v0 down to the centre line of the south loop (or the boundary if the loop is not under it)
+const vRoad=(k,v0,kind)=>{const c=col[k],a=vAt(slMid,c.u0),b=vAt(slMid,c.u1);let r=clipRect(Q,c.u0,c.u1,v0,800);
+  if(a!==null&&b!==null)r=clipHalf(r,p=>a+(p[0]-c.u0)*(b-a)/(c.u1-c.u0)-p[1]);addRoad(r,kind);};
+// north link: 40 ft road across the top of the enclave, R1 -> R3, so R2/R3 are not dead ends
+const NL=C.northLink??[13.5,13.5+W40];out.NL=NL;
+vRoad('R1',RB.c[1],'60');
+vRoad('R2',NL[0],'40');vRoad('R3',NL[0],'40');vRoad('R4',C.r4start??279,'40');
+roadRect(col.R1.u1,col.R3.u1,NL[0],NL[1],'40');
 cross.forEach(v=>roadRect(col.R1.u1,400,v,v+W40,'40'));
-// north link road along the top of the enclave (frontage + access to R2..)
-if(C.north===true) roadRect(col.R1.u1,400,VN+BELT,VN+BELT+W40,'40');
 // park
 const inPark=p=>park.cols.some(k=>p[0]>=col[k].u0-0.01&&p[0]<=col[k].u1+0.01)&&p[1]>=park.v0-0.01&&p[1]<=park.v1+0.01;
 const inRoad=p=>out.roads.some(r=>inPoly(p,r.pts));
 const okPt=p=>inTown(p)&&edgeDist(p)>=BELT-0.01&&p[1]>=VN&&!inPark(p)&&!(Math.hypot(p[0]-RB.c[0],p[1]-RB.c[1])<RB.r+3);
-const roadSet=()=>out.roads;
 seq.filter(s=>s[2]).forEach(([k,w,t,f])=>{
   const c=col[k];const pw=W[t];
-  // walk down v, skipping roads
   let v=VN;
-  while(v<vEnd){
-    const r=R(c.u0,c.u1,v,v+pw);
-    const mid=[[c.u0+0.2,v+0.2],[c.u1-0.2,v+0.2],[c.u1-0.2,v+pw-0.2],[c.u0+0.2,v+pw-0.2],[(c.u0+c.u1)/2,v+pw/2]];
-    if(mid.some(p=>inRoad(p))){v+=0.5;continue;}
+  while(v<800){
+    const r=R(c.u0,c.u1,v,v+pw),e=0.2,um=(c.u0+c.u1)/2,vm=v+pw/2;
+    const probe=[[c.u0+e,v+e],[c.u1-e,v+e],[c.u1-e,v+pw-e],[c.u0+e,v+pw-e],[um,vm],[um,v+e],[um,v+pw-e],[c.u0+e,vm],[c.u1-e,vm]];
+    if(probe.some(inRoad)){v+=0.5;continue;}
     if(r.every(okPt)){out.plots.push({r,t,f,col:k});v+=pw;} else v+=0.5;
   }
 });
-// arm: boulevard, gate, commercial, institutional
-const gateV=-258;
-const BL=[[34,gateV-6],[RB.c[0],RB.c[1]]];
-out.blvd=BL;
-const bu=v=>BL[0][0]+(v-BL[0][1])*(BL[1][0]-BL[0][0])/(BL[1][1]-BL[0][1]);
-out.blvdPoly=clipHalf(clipHalf(clipHalf(Q,p=>p[1]-(gateV-10)),p=>RB.c[1]-p[1]),p=>W100/2-Math.abs(p[0]-bu(p[1])));
-out.gate=clipHalf(clipHalf(Q,p=>gateV+22-p[1]),p=>18-Math.abs(p[0]-bu(p[1])));
-// commercial lots (SCO): 6 m forecourt then 9.14 m wide x 18 m deep, both sides
+// ---------------- arrival arm ----------------
+// straight 100 ft boulevard on the UC axis: gate plaza -> roundabout. Shops face it across a parking forecourt.
+const H100=W100/2,FC=6,SCO_W=9.144,SCO_D=18.288,gateV=-236;
+out.gateV=gateV;
+out.gate=addRoad(clipRect(Q,UC-26,UC+26,-400,gateV),'100');
+out.blvdPoly=addRoad(clipRect(Q,UC-H100,UC+H100,gateV,RB.c[1]),'100');
+out.spur=addRoad(clipRect(Q,uS-14,UC,RB.c[1]-4.5,RB.c[1]+4.5),'40');
 out.com=[];
-for(const side of [-1,1]){for(let v=-236;v<-64;v+=9.14+0.0){
-  const a=bu(v)+side*(W100/2+6), b=a+side*18; const r=R(Math.min(a,b),Math.max(a,b),v,v+9.14);
-  if(r.every(p=>inPoly(p,Q)&&edgeDist(p)>=BELT))out.com.push({r,side});}}
-// zones in the arm (drawn as backgrounds)
-out.armCom=clipHalf(clipHalf(Q,p=>p[1]-(gateV+22)),p=>-60-p[1]);
-out.inst=clipHalf(clipHalf(clipHalf(Q,p=>p[1]+60),p=>VU-p[1]),p=>bu(p[1])-W100/2-p[0]);
-out.arrival=clipHalf(clipHalf(clipHalf(Q,p=>p[1]+60),p=>VN-p[1]),p=>p[0]-bu(p[1])-W100/2);
-out.park=R(col[park.cols[0]].u0,col[park.cols[park.cols.length-1]].u1,park.v0,park.v1);
+const lotOK=r=>r.every(p=>inPoly(p,Q)&&edgeDist(p)>=BELT);
+// west high street (two terraces with a pedestrian plaza between), east terrace where the arm is wide enough
+const terr=(side,v0,v1)=>{const a=side<0?UC-H100-FC-SCO_D:UC+H100+FC;let n=0;for(let v=v0;v+SCO_W<=v1+1e-6;v+=SCO_W){const r=R(a,a+SCO_D,v,v+SCO_W);if(lotOK(r)){out.com.push({r,side});n++;}}return n;};
+const WP=[-230,-150.5,-138.5,-62];             // west terraces: -230..-150.5 and -138.5..-62, plaza between
+terr(-1,WP[0],WP[1]);out.plaza=R(UC-H100-FC-SCO_D,UC-H100-FC,WP[1],WP[2]);terr(-1,WP[2],WP[3]);
+terr(1,-230,-120);
+const comV=s=>{const v=out.com.filter(c=>c.side===s).map(c=>[c.r[0][1],c.r[2][1]]);return v.length?[Math.min(...v.map(x=>x[0])),Math.max(...v.map(x=>x[1]))]:null;};
+const wv=comV(-1),ev=comV(1);
+out.fcW=addRoad(clipRect(Q,UC-H100-FC,UC-H100,wv[0],wv[1]),'park');
+if(ev)out.fcE=addRoad(clipRect(Q,UC+H100,UC+H100+FC,ev[0],ev[1]),'park');
+// service lane behind the west shops, feeding the commercial hub
+const back=UC-H100-FC-SCO_D-LANE;
+out.lane=addRoad(clipRect(Q,back,UC-H100-FC-SCO_D,wv[0]-LANE,wv[1]+LANE),'lane');
+// lane joins the boulevard at both ends of the terrace, so service traffic loops instead of reversing
+addRoad(clipRect(Q,back,UC-H100,wv[0]-LANE,wv[0]),'lane');addRoad(clipRect(Q,back,UC-H100,wv[1],wv[1]+LANE),'lane');
+out.hub=clipRect(Q,-400,back,-200,wv[1]+LANE);
+out.inst=clipRect(Q,-400,UC-H100,wv[1]+LANE+3,RB.c[1]-4.5);
 out.campusSpur=[[RB.c[0]-RB.r,RB.c[1]],[uS-14,RB.c[1]]];
-// ---------------- accounting by sampling ----------------
-const s=1.0;const cnt={plot:0,road:0,green:0,com:0,amen:0,uni:0};let tot=0;
-const plotSet=out.plots.map(p=>p.r);
-for(let uu=-260;uu<320;uu+=s)for(let vv=-300;vv<720;vv+=s){const p=[uu+s/2,vv+s/2];if(!inPoly(p,Q))continue;tot++;
-  if(!inTown(p)){cnt.uni++;continue;}
-  if(Math.hypot(p[0]-RB.c[0],p[1]-RB.c[1])<=RB.r||inPoly(p,out.blvdPoly)||inPoly(p,out.gate)||inRoad(p)||(p[1]>RB.c[1]-4.5&&p[1]<RB.c[1]+4.5&&p[0]<RB.c[0]&&p[0]>uS-14)){cnt.road++;continue;}
-  if(plotSet.some(r=>p[0]>=r[0][0]&&p[0]<=r[1][0]&&p[1]>=r[0][1]&&p[1]<=r[2][1])){cnt.plot++;continue;}
-  if(inPoly(p,out.armCom)||inPoly(p,out.inst)){cnt.com++;continue;}
-  if(inPark(p)&&p[1]<park.v0+40){cnt.amen++;continue;} // clubhouse pad
-  cnt.green++;}
-const ha={};for(const k in cnt)ha[k]=cnt[k]/tot*SITE_HA;out.ha=ha;out.NET=SITE_HA-ha.uni;
+out.campusGate=[uS-14,VU];
+out.arrival=clipRect(Q,UC+H100,400,(ev?ev[1]:-230)+4,VN);
+out.park=R(col[park.cols[0]].u0,col[park.cols[park.cols.length-1]].u1,park.v0,park.v1);
+out.club=R(out.park[0][0]+3,out.park[1][0]-3,park.v0+2,park.v0+37);
+// ---------------- area statement ----------------
+// Plots and shop lots are exact rectangles at their sold size. Zones are exact polygon areas.
+// Roads overlap at junctions, so they are measured on a 0.5 m grid. Open space is the balance.
+const rectA=r=>(r[1][0]-r[0][0])*(r[2][1]-r[0][1]);
+const A={};
+A.uni=areaPoly(UNI)/1e4*K;
+A.plot={};['500','400','250'].forEach(t=>A.plot[t]=out.plots.filter(p=>p.t===t).reduce((s,p)=>s+rectA(p.r),0)/1e4);
+A.sco=out.com.reduce((s,c)=>s+rectA(c.r),0)/1e4;
+A.hub=areaPoly(out.hub)/1e4*K;A.inst=areaPoly(out.inst)/1e4*K;A.club=rectA(out.club)/1e4*K;
+A.park=(rectA(out.park)-rectA(out.club))/1e4*K;
+const rc={'100':0,'60':0,'40':0,'lane':0,'park':0},s=C.grid??0.5;
+let bb=[1e9,1e9,-1e9,-1e9];Q.forEach(p=>{bb=[Math.min(bb[0],p[0]),Math.min(bb[1],p[1]),Math.max(bb[2],p[0]),Math.max(bb[3],p[1])];});
+const rb=out.roads.map(r=>{let b=[1e9,1e9,-1e9,-1e9];r.pts.forEach(p=>{b=[Math.min(b[0],p[0]),Math.min(b[1],p[1]),Math.max(b[2],p[0]),Math.max(b[3],p[1])];});return b;});
+const ORD=['100','60','40','lane','park'];
+for(let uu=bb[0];uu<bb[2];uu+=s)for(let vv=bb[1];vv<bb[3];vv+=s){const p=[uu+s/2,vv+s/2];
+  if(Math.hypot(p[0]-RB.c[0],p[1]-RB.c[1])<=RB.r){if(inPoly(p,Q))rc['100']++;continue;}
+  let k=null;for(let i=0;i<out.roads.length;i++){const b=rb[i];if(p[0]<b[0]||p[0]>b[2]||p[1]<b[1]||p[1]>b[3])continue;if(inPoly(p,out.roads[i].pts)){const kk=out.roads[i].kind;if(k===null||ORD.indexOf(kk)<ORD.indexOf(k))k=kk;}}
+  if(k&&inTown(p))rc[k]++;}
+A.road={};for(const k in rc)A.road[k]=rc[k]*s*s/1e4*K;
+A.net=SITE_HA-A.uni;
+const sum=o=>Object.values(o).reduce((a,b)=>a+b,0);
+A.green=A.net-sum(A.plot)-A.sco-A.hub-A.inst-A.club-A.park-sum(A.road);
+out.A=A;out.NET=A.net;
 const n={};['500','400','250'].forEach(t=>n[t]=out.plots.filter(p=>p.t===t).length);out.n=n;
-out.plotHaExact=(n['500']*W['500']*PD+n['400']*W['400']*PD+n['250']*W['250']*D25)/1e4*K;
-G.LAYOUT=out;G.GEO={xy,toUV,Q,R,inPoly,edgeDist,inTown,uS,UNI,K,clipHalf};
+// legacy summary used by run.js
+out.ha={plot:sum(A.plot),road:sum(A.road),green:A.green+A.park,com:A.sco+A.hub,amen:A.inst+A.club,uni:A.uni};
+out.plotHaExact=sum(A.plot);
+G.LAYOUT=out;G.GEO={xy,toUV,Q,R,inPoly,edgeDist,inTown,uS,UNI,K,clipHalf,clipRect,areaPoly,VU,BELT};
 })(typeof window!=='undefined'?window:globalThis);

@@ -2,188 +2,289 @@
 <style>
 @page{size:A2 landscape;margin:0}
 html,body{margin:0;background:#fff;color:#23241f;font-family:Arial,Helvetica,sans-serif}
-.sheet{width:594mm;height:420mm;box-sizing:border-box;padding:9mm;display:flex;gap:8mm;border:0}
-.planbox{width:372mm;height:402mm;border:1.2px solid #3d3a30;position:relative;background:#f4efe3}
+.sheet{width:594mm;height:420mm;box-sizing:border-box;padding:9mm;display:flex;gap:7mm;border:0}
+.planbox{width:362mm;height:402mm;border:1.2px solid #3d3a30;position:relative;background:#f4efe3}
 #plan{width:100%;height:100%}
-.side{flex:1;display:flex;flex-direction:column;border:1.2px solid #3d3a30;padding:6mm 6mm 0;box-sizing:border-box}
-.brand{border-bottom:2px solid #9a7b3c;padding-bottom:4mm;margin-bottom:3mm}
+.side{flex:1;display:flex;flex-direction:column;border:1.2px solid #3d3a30;padding:5mm 6mm 0;box-sizing:border-box}
+.brand{border-bottom:2px solid #9a7b3c;padding-bottom:3mm;margin-bottom:1mm}
 .brand .k{font-size:10px;letter-spacing:3px;color:#9a7b3c}
-.brand h1{font-family:Georgia,serif;font-weight:normal;font-size:30px;letter-spacing:2px;margin:2mm 0 1mm;color:#23241f}
+.brand h1{font-family:Georgia,serif;font-weight:normal;font-size:30px;letter-spacing:2px;margin:1.5mm 0 1mm;color:#23241f}
 .brand .s{font-size:11px;color:#555;line-height:1.45}
-h3{font-family:Georgia,serif;font-weight:normal;color:#7d6230;font-size:14px;letter-spacing:1.5px;text-transform:uppercase;margin:4mm 0 1.5mm;border-bottom:1px solid #e2d8bd;padding-bottom:1mm}
-table{border-collapse:collapse;width:100%;font-size:11px}
-td,th{padding:2.2px 3px;text-align:right;border-bottom:1px solid #eee6d3}
-td:first-child,th:first-child{text-align:left}
-th{font-weight:normal;color:#8a7650;font-size:9px;letter-spacing:1px;text-transform:uppercase}
-.tot td{font-weight:bold;border-top:1.5px solid #9a7b3c;border-bottom:none}
-.sw{display:inline-block;width:12px;height:12px;vertical-align:-2px;margin-right:6px;border:1px solid rgba(0,0,0,.3)}
-.key{columns:2;column-gap:6mm;font-size:11px;margin:0;padding:0;list-style:none}
-.key li{break-inside:avoid;margin:0 0 3px;display:flex;gap:6px;align-items:flex-start}
-.key b{display:inline-flex;justify-content:center;align-items:center;min-width:17px;height:17px;border-radius:50%;background:#3d3a30;color:#fff;font-size:9.5px;flex:none}
-.note{font-size:9px;color:#777;line-height:1.4;margin-top:3mm}
-.tb{margin-top:auto;border-top:1.2px solid #3d3a30;display:grid;grid-template-columns:1fr 1fr 1fr;font-size:9.5px;margin-left:-6mm;margin-right:-6mm}
+h3{font-family:Georgia,serif;font-weight:normal;color:#7d6230;font-size:13.5px;letter-spacing:1.5px;text-transform:uppercase;margin:3.2mm 0 1.2mm;border-bottom:1px solid #e2d8bd;padding-bottom:1mm}
+h3 small{font-size:10px;text-transform:none;letter-spacing:0;color:#8a7650}
+table{border-collapse:collapse;width:100%;font-size:10.5px}
+td,th{padding:1.9px 4px;text-align:right;border-bottom:1px solid #eee6d3;white-space:nowrap}
+td:first-child,th:first-child{text-align:left;white-space:normal}
+th{font-weight:normal;color:#8a7650;font-size:8.5px;letter-spacing:1px;text-transform:uppercase}
+tr.grp td{font-weight:bold;background:#f7f2e6;border-top:1px solid #d9ccaa}
+tr.sub td:first-child{padding-left:22px;color:#444}
+tr.sub td{color:#555}
+.tot td{font-weight:bold;border-top:1.5px solid #9a7b3c;border-bottom:1.5px solid #9a7b3c;background:#f3ead4}
+tr.hl td{font-weight:bold;color:#5c4718}
+.sw{display:inline-block;width:11px;height:11px;vertical-align:-2px;margin-right:6px;border:1px solid rgba(0,0,0,.3)}
+.key{columns:2;column-gap:6mm;font-size:10.5px;margin:0;padding:0;list-style:none}
+.key li{break-inside:avoid;margin:0 0 2.5px;display:flex;gap:6px;align-items:flex-start}
+.key b{display:inline-flex;justify-content:center;align-items:center;min-width:16px;height:16px;border-radius:50%;background:#3d3a30;color:#fff;font-size:9px;flex:none}
+.note{font-size:8.8px;color:#6f6a5c;line-height:1.4;margin-top:2.5mm}
+.tb{margin-top:auto;border-top:1.2px solid #3d3a30;display:grid;grid-template-columns:1.2fr 1fr 1fr 1fr;font-size:9.5px;margin-left:-6mm;margin-right:-6mm}
 .tb div{padding:2mm 3mm;border-right:1px solid #cfc6ae}.tb div:last-child{border-right:none}
 .tb span{display:block;color:#8a7650;font-size:8px;letter-spacing:1px;text-transform:uppercase}
-.ok{color:#2e6b34}.lo{color:#9a3b22}
 </style></head><body>
 <div class="sheet">
 <div class="planbox"><svg id="plan" xmlns="http://www.w3.org/2000/svg"></svg></div>
 <div class="side">
- <div class="brand"><div class="k">CONCEPT MASTER PLAN · V3</div>
+ <div class="brand"><div class="k">CONCEPT MASTER PLAN · V4</div>
  <h1>THE UNIVERSITY ESTATE</h1>
  <div class="s">Premium gated plotted township with an integrated 25-acre university campus<br>Jot Sadruddin + Jot Dariya · Tehsil Pahari · District Deeg · Rajasthan</div></div>
  <h3>Site statement</h3>
  <table id="site"></table>
- <h3>Township land use <span style="font-size:10px;text-transform:none;letter-spacing:0">(net of university)</span></h3>
+ <h3>Area statement <small>(township, net of university)</small></h3>
  <table id="lu"></table>
  <h3>Plot schedule</h3>
  <table id="ps"></table>
  <h3>Key</h3>
  <ul class="key" id="key"></ul>
- <div class="note">Plots are drawn at full size and counted: 500 sq yd = 50 × 90 ft, 400 sq yd = 40 × 90 ft, 250 sq yd = 30 × 75 ft. Commercial SCO lots are 30 × 60 ft. Other areas are measured from the plan on a 1 m grid and scaled to the 28.40 ha traced site. The campus layout is indicative and by others. The boundary is traced from BhuNaksha, and the south-west edge and plot 1510 need a patwari demarcation and a DGPS survey before approval. Check against the current Rajasthan Township Policy and the land-conversion order.</div>
- <div class="tb"><div><span>Gross site</span>28.40 ha · 70.2 acres</div><div><span>Date / scale</span>24 Oct 2026 · scale bar</div><div><span>Status</span>Concept, not for construction</div></div>
+ <div class="note" id="note"></div>
+ <div class="tb"><div><span>Gross site</span>28.40 ha · 70.18 acres</div><div><span>Drawing</span>MP-01 · Rev V4</div><div><span>Date / scale</span><span id="dt" style="display:inline;color:inherit;font-size:inherit;letter-spacing:0;text-transform:none"></span> · scale bar</div><div><span>Status</span>Concept, not for construction</div></div>
 </div></div>
 <script src="layout.js"></script>
 <script>
-const Lx=LAYOUT,{xy,Q,R,inPoly,edgeDist,inTown,uS,UNI,K}=GEO;
+const Lx=LAYOUT,{xy,Q,R,inPoly,edgeDist,inTown,uS,UNI,K,clipRect,VU}=GEO,A=Lx.A,UC=Lx.UC;
 const NS='http://www.w3.org/2000/svg',svg=document.getElementById('plan');
-const el=(t,a,txt,par)=>{const e=document.createElementNS(NS,t);for(const k in a)e.setAttribute(k,a[k]);if(txt!=null)e.textContent=txt;(par||svg).appendChild(e);return e;};
+const el=(t,a,txt,par)=>{const e=document.createElementNS(NS,t);for(const k in a)if(a[k]!=null)e.setAttribute(k,a[k]);if(txt!=null)e.textContent=txt;(par||svg).appendChild(e);return e;};
 const X=pts=>pts.map(p=>xy(p[0],p[1]));
 const dP=(pts,c=true)=>'M'+X(pts).map(p=>p[0].toFixed(2)+' '+p[1].toFixed(2)).join(' L')+(c?' Z':'');
-svg.setAttribute('viewBox','-40 -50 700 755');svg.setAttribute('preserveAspectRatio','xMidYMid meet');
-// fit: compute bbox of site
 const B=X(Q);const mnx=Math.min(...B.map(p=>p[0])),mxx=Math.max(...B.map(p=>p[0])),mny=Math.min(...B.map(p=>p[1])),mxy=Math.max(...B.map(p=>p[1]));
-const pad=40,vbW=(mxx-mnx)+pad*2,vbH=(mxy-mny)+pad*2,asp=372/402;let W=vbW,H=vbH;if(W/H<asp)W=H*asp;else H=W/asp;
-svg.setAttribute('viewBox',`${(mnx+mxx)/2-W/2} ${(mny+mxy)/2-H/2} ${W} ${H}`);
+const pad=34,vbW=(mxx-mnx)+pad*2,vbH=(mxy-mny)+pad*2,asp=362/402;let W=vbW,H=vbH;if(W/H<asp)W=H*asp;else H=W/asp;
+const vx=(mnx+mxx)/2-W/2+60,vy=(mny+mxy)/2-H/2;   // shift right: legend sits in the open area on the left
+svg.setAttribute('viewBox',`${vx} ${vy} ${W} ${H}`);
+const ROT=17,VROT=ROT-90;                          // u axis is rotated 17 deg; text along v reads bottom-up
 const defs=el('defs',{});
 defs.innerHTML=`<clipPath id="siteclip"><path d="${dP(Q)}"/></clipPath>
 <filter id="sh" x="-30%" y="-30%" width="160%" height="160%"><feDropShadow dx=".6" dy=".9" stdDeviation=".6" flood-color="#1d2e14" flood-opacity=".35"/></filter>
 <radialGradient id="t1"><stop offset="0" stop-color="#86b86e"/><stop offset=".75" stop-color="#4d8a3d"/><stop offset="1" stop-color="#2e5e28"/></radialGradient>
 <radialGradient id="t2"><stop offset="0" stop-color="#b3cf7a"/><stop offset=".75" stop-color="#76a24c"/><stop offset="1" stop-color="#456f2e"/></radialGradient>
-<radialGradient id="t3"><stop offset="0" stop-color="#e7b3c4"/><stop offset=".75" stop-color="#c47b95"/><stop offset="1" stop-color="#8d4c63"/></radialGradient>
+<radialGradient id="t3"><stop offset="0" stop-color="#f1c2d2"/><stop offset=".75" stop-color="#c9809a"/><stop offset="1" stop-color="#8d4c63"/></radialGradient>
+<radialGradient id="t4"><stop offset="0" stop-color="#f6d77c"/><stop offset=".75" stop-color="#d9a634"/><stop offset="1" stop-color="#93701f"/></radialGradient>
 <linearGradient id="wat" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#a9dbea"/><stop offset="1" stop-color="#4b9cc0"/></linearGradient>
 <pattern id="lawn" width="5" height="5" patternUnits="userSpaceOnUse"><rect width="5" height="5" fill="#bcd796"/><circle cx="1.2" cy="1.3" r=".45" fill="#aecb85"/><circle cx="3.7" cy="3.6" r=".45" fill="#c8e0a6"/></pattern>
-<pattern id="pav" width="3" height="3" patternUnits="userSpaceOnUse"><rect width="3" height="3" fill="#ece2c9"/><path d="M0 0H3M0 0V3" stroke="#dacca8" stroke-width=".25"/></pattern>
+<pattern id="pav" width="3" height="3" patternUnits="userSpaceOnUse" patternTransform="rotate(${ROT})"><rect width="3" height="3" fill="#ece2c9"/><path d="M0 0H3M0 0V3" stroke="#dacca8" stroke-width=".25"/></pattern>
+<pattern id="pav2" width="4" height="4" patternUnits="userSpaceOnUse" patternTransform="rotate(${ROT+45})"><rect width="4" height="4" fill="#e9dcc0"/><path d="M0 0H4M0 0V4" stroke="#d3c19a" stroke-width=".3"/></pattern>
 <pattern id="hatch" width="4" height="4" patternUnits="userSpaceOnUse" patternTransform="rotate(45)"><rect width="4" height="4" fill="#e7dfcd"/><path d="M0 0V4" stroke="#d6cbb2" stroke-width=".8"/></pattern>`;
 // context cadastral (faint)
 el('image',{href:'../survey/joint_parcel.png',x:0,y:0,width:613.5,height:1037,opacity:.16});
 const G=el('g',{'clip-path':'url(#siteclip)'});
-// base = landscape
-el('path',{d:dP(Q),fill:'url(#lawn)'},null,G);
-// university
-el('path',{d:dP(UNI),fill:'url(#hatch)'},null,G);
-// arm zones
-el('path',{d:dP(Lx.armCom),fill:'#f1dcc6'},null,G);
-el('path',{d:dP(Lx.inst),fill:'#efd3d9'},null,G);
-el('path',{d:dP(Lx.arrival),fill:'url(#lawn)'},null,G);
-// roads: kerb/footpath then carriageway
-const RD={'100':'#6c6b67','60':'#7d7b75','40':'#94918a'};
-Lx.roads.forEach(r=>el('path',{d:dP(r.pts),fill:'#ddd5c2'},null,G));
-el('path',{d:dP(Lx.blvdPoly),fill:'#ddd5c2'},null,G);
-el('path',{d:dP(Lx.gate),fill:'url(#pav)'},null,G);
-const inset=(pts,d)=>pts; // footpath shown via stroke below
-Lx.roads.forEach(r=>el('path',{d:dP(r.pts),fill:RD[r.kind],stroke:'#ddd5c2','stroke-width':2.2,'paint-order':'stroke'},null,G));
-el('path',{d:dP(Lx.blvdPoly),fill:RD['100'],stroke:'#ddd5c2','stroke-width':2.6},null,G);
-// boulevard median
-const bl=Lx.blvd;const med=[[bl[0][0],bl[0][1]+20],[bl[1][0],bl[1][1]-Lx.RB.r-2]];
-el('path',{d:dP(med,false),fill:'none',stroke:'#7fae5f','stroke-width':5,'stroke-linecap':'round'},null,G);
-// campus spur
-el('path',{d:dP(Lx.campusSpur,false),fill:'none',stroke:'#ddd5c2','stroke-width':11.3},null,G);
-el('path',{d:dP(Lx.campusSpur,false),fill:'none',stroke:RD['40'],'stroke-width':9.1},null,G);
-// roundabout (fully inside site)
-const rc=xy(...Lx.RB.c);el('circle',{cx:rc[0],cy:rc[1],r:Lx.RB.r+1.2,fill:'#ddd5c2'},null,G);el('circle',{cx:rc[0],cy:rc[1],r:Lx.RB.r,fill:RD['100']},null,G);
-el('circle',{cx:rc[0],cy:rc[1],r:Lx.RB.r-8,fill:'url(#lawn)',stroke:'#ece2c9','stroke-width':1.2},null,G);el('circle',{cx:rc[0],cy:rc[1],r:3,fill:'#c9a85a',stroke:'#fff','stroke-width':.6},null,G);
-// lane markings
-Lx.roads.forEach(r=>{});
-// gate plaza: gatehouse + fountain
-const gc=[bl[0][0]+(bl[1][0]-bl[0][0])*0.02,bl[0][1]+12];
-const gp=xy(...gc);el('circle',{cx:gp[0],cy:gp[1],r:5,fill:'url(#wat)',stroke:'#fff','stroke-width':1},null,G);
-[-1,1].forEach(s=>el('path',{d:dP(R(gc[0]+s*17-3,gc[0]+s*17+3,gc[1]+4,gc[1]+10)),fill:'#fff',stroke:'#6d5a35','stroke-width':.5,filter:'url(#sh)'},null,G));
-// commercial SCO lots
-Lx.com.forEach(c=>{el('path',{d:dP(c.r),fill:'#f7e6d3',stroke:'#b88e6a','stroke-width':.4},null,G);
- const [a,b]=[c.r[0],c.r[2]];const m=1.2,f=c.side<0?[a[0]+m,b[0]-3]:[a[0]+3,b[0]-m];el('path',{d:dP(R(f[0],f[1],a[1]+.6,b[1]-.6)),fill:'#fffaf2',stroke:'#a07a58','stroke-width':.3},null,G);});
-// forecourt parking strips (between boulevard and SCO)
-// institutional building
-const ib=Lx.inst;const ic=ib.reduce((a,p)=>[a[0]+p[0]/ib.length,a[1]+p[1]/ib.length],[0,0]);
-// plots
-const PF={'500':'#ecd29b','400':'#f3e1b6','250':'#faf0d8'};
-Lx.plots.forEach(p=>{el('path',{d:dP(p.r),fill:PF[p.t],stroke:'#a99561','stroke-width':.4},null,G);
+const poly=(pts,a)=>el('path',Object.assign({d:dP(pts)},a),null,G);
+const rect=(u0,u1,v0,v1,a)=>poly(R(u0,u1,v0,v1),a);
+const line=(pts,a)=>el('path',Object.assign({d:dP(pts,false),fill:'none'},a),null,G);
+const text=(u,v,s,a,par)=>{const p=xy(u,v);return el('text',Object.assign({x:p[0],y:p[1],'text-anchor':'middle','dominant-baseline':'middle',transform:`rotate(${a.rot??ROT} ${p[0]} ${p[1]})`},a),s,par||G);};
+// palette
+const CL={p500:'#ecd29b',p400:'#f3e1b6',p250:'#faf0d8',sco:'#f5d9bd',hub:'#f1dcc6',inst:'#efd3d9',club:'#e6d9f0',green:'#bcd796',uni:'#e7dfcd',r100:'#5f5e5a',r60:'#75736d',r40:'#8f8c85',lane:'#a8a49b',park:'#b9b4a8',foot:'#ddd5c2',trail:'#e4cfa3'};
+// ---------- base ----------
+poly(Q,{fill:'url(#lawn)'});
+poly(UNI,{fill:'url(#hatch)'});
+// perimeter jogging trail inside the green belt
+el('path',{d:dP(Q),fill:'none',stroke:CL.trail,'stroke-width':3.2,'stroke-dasharray':'none'},null,G);
+el('path',{d:dP(Q),fill:'none',stroke:'#cdb27c','stroke-width':3.2,'stroke-dasharray':'.3 2.2'},null,G);
+poly(UNI,{fill:'url(#hatch)'});
+poly(Lx.hub,{fill:CL.hub});
+poly(Lx.inst,{fill:CL.inst});
+// ---------- roads ----------
+const RF={'100':CL.r100,'60':CL.r60,'40':CL.r40,lane:CL.lane,park:CL.park};
+Lx.roads.forEach(r=>poly(r.pts,{fill:CL.foot,stroke:CL.foot,'stroke-width':2.4}));
+Lx.roads.forEach(r=>{if(r.pts===Lx.gate||r.pts===Lx.blvdPoly)return;poly(r.pts,{fill:RF[r.kind],stroke:CL.foot,'stroke-width':2,'paint-order':'stroke'});});
+// gate plaza: paved forecourt, split carriageways, security island, gatehouses, boom barriers
+const gV=Lx.gateV;
+poly(Lx.gate,{fill:'url(#pav2)'});
+[[-12.74,-3.24],[3.24,12.74]].forEach(([a,b])=>rect(UC+a,UC+b,gV-60,gV+1,{fill:CL.r100}));
+rect(UC-3.24,UC+3.24,gV-24,gV+1,{fill:'url(#lawn)',stroke:'#ece2c9','stroke-width':.8});
+rect(UC-1.6,UC+1.6,gV-17,gV-12,{fill:'#fff',stroke:'#6d5a35','stroke-width':.5,filter:'url(#sh)'});
+[-1,1].forEach(s=>{rect(UC+s*19-4.5,UC+s*19+4.5,gV-20,gV-11,{fill:'#fffaf0',stroke:'#6d5a35','stroke-width':.6,filter:'url(#sh)'});
+  line([[UC+s*3.24,gV-14.5],[UC+s*12.74,gV-14.5]],{stroke:'#c0392b','stroke-width':.7,'stroke-dasharray':'1.2 .8'});
+  // entry feature walls with planting
+  rect(UC+s*15.5-(s<0?9:0),UC+s*15.5+(s>0?9:0),gV-3,gV-1.6,{fill:'#9a7b3c'});
+  [0,1,2].forEach(i=>{const p=xy(UC+s*(25+i*5),gV-5);});});
+text(UC,gV-29,'MAIN GATE',{'font-size':3.4,'font-weight':'bold',fill:'#fff','letter-spacing':.6,rot:ROT});
+// 100 ft boulevard: footpaths, two carriageways, planted median
+const bv0=gV,bv1=Lx.RB.c[1];
+rect(UC-15.24,UC+15.24,bv0,bv1,{fill:CL.foot});
+[[-12.74,-3.24],[3.24,12.74]].forEach(([a,b])=>{rect(UC+a,UC+b,bv0,bv1,{fill:CL.r100});line([[UC+(a+b)/2,bv0+3],[UC+(a+b)/2,bv1-Lx.RB.r]],{stroke:'#f4f0e4','stroke-width':.35,'stroke-dasharray':'3 3'});});
+rect(UC-3.24,UC+3.24,bv0+1,bv1-Lx.RB.r+1,{fill:'url(#lawn)',stroke:'#ece2c9','stroke-width':.8});
+// lane centre lines on 60 ft and 40 ft roads (straight ones)
+const cline=(pts)=>line(pts,{stroke:'#f4f0e4','stroke-width':.3,'stroke-dasharray':'2.5 3'});
+['R1','R2','R3','R4'].forEach(k=>{const c=Lx.col[k];const r=Lx.roads.find(q=>Math.abs(q.pts[0][0]-c.u1)<1&&q.pts.some(p=>Math.abs(p[0]-c.u0)<1)&&q.kind!=='lane');if(!r)return;const vs=r.pts.map(p=>p[1]);cline([[(c.u0+c.u1)/2,Math.min(...vs)+2],[(c.u0+c.u1)/2,Math.max(...vs)-6]]);});
+Lx.cross.forEach(v=>cline([[Lx.col.R1.u1+2,v+6.1],[Lx.col.R4.u1+20,v+6.1]]));
+cline([[Lx.col.R1.u1+2,(Lx.NL[0]+Lx.NL[1])/2],[Lx.col.R3.u0-2,(Lx.NL[0]+Lx.NL[1])/2]]);
+{const pts=[];for(let u=Lx.col.R1.u1;u<=Lx.col.R4.u0;u+=4)pts.push([u,Lx.loopV(u)]);cline(pts);}
+// parking forecourts: 5 m bays + 1 m walk
+[Lx.fcW&&[Lx.fcW,-1],Lx.fcE&&[Lx.fcE,1]].filter(Boolean).forEach(([fc,s])=>{const us=fc.map(p=>p[0]),vs=fc.map(p=>p[1]);const u0=Math.min(...us),u1=Math.max(...us),v0=Math.min(...vs),v1=Math.max(...vs);
+  const bay=s<0?[u0+1,u1]:[u0,u1-1];rect(s<0?u0:u1-1,s<0?u0+1:u1,v0,v1,{fill:CL.foot});
+  for(let v=v0;v<=v1+.01;v+=2.6)line([[bay[0],v],[bay[1],v]],{stroke:'#fff','stroke-width':.25});});
+// roundabout with fountain
+const rc=xy(...Lx.RB.c);el('circle',{cx:rc[0],cy:rc[1],r:Lx.RB.r+1.4,fill:CL.foot},null,G);el('circle',{cx:rc[0],cy:rc[1],r:Lx.RB.r,fill:CL.r100},null,G);
+el('circle',{cx:rc[0],cy:rc[1],r:Lx.RB.r-7.5,fill:'url(#lawn)',stroke:'#ece2c9','stroke-width':1.2},null,G);
+el('circle',{cx:rc[0],cy:rc[1],r:4.6,fill:'url(#wat)',stroke:'#fff','stroke-width':.8},null,G);el('circle',{cx:rc[0],cy:rc[1],r:1.4,fill:'#c9a85a',stroke:'#fff','stroke-width':.4},null,G);
+el('circle',{cx:rc[0],cy:rc[1],r:Lx.RB.r-3.75,fill:'none',stroke:'#f4f0e4','stroke-width':.3,'stroke-dasharray':'2.5 3'},null,G);
+// campus gate
+const cg=Lx.campusGate;rect(cg[0]-6,cg[0]+6,cg[1]-1.2,cg[1],{fill:'#9a7b3c'});rect(cg[0]+7,cg[0]+11,cg[1]-9,cg[1]-4,{fill:'#fff',stroke:'#6d5a35','stroke-width':.5,filter:'url(#sh)'});
+// ---------- commercial ----------
+Lx.com.forEach(c=>{poly(c.r,{fill:CL.sco,stroke:'#b88e6a','stroke-width':.4});
+  const [u0,v0]=c.r[0],u1=c.r[1][0],v1=c.r[2][1];const f=c.side<0?[u0+3,u1-2.4]:[u0+2.4,u1-3];
+  rect(f[0],f[1],v0+.5,v1-.5,{fill:'#fffaf2',stroke:'#a07a58','stroke-width':.3});
+  const ar=c.side<0?[u1-2.4,u1]:[u0,u0+2.4];rect(ar[0],ar[1],v0,v1,{fill:'#e8d2b4'});});
+// shop plaza between the two west terraces
+{const p=Lx.plaza,u0=p[0][0],u1=p[1][0],v0=p[0][1],v1=p[2][1];rect(u0-6,u1+6,v0,v1,{fill:'url(#pav)'});
+ const c=xy((u0+u1)/2,(v0+v1)/2);el('circle',{cx:c[0],cy:c[1],r:3.2,fill:'url(#wat)',stroke:'#fff','stroke-width':.7},null,G);}
+// commercial hub: hotel, retail and F&B, parking court
+const fits=(r,pl)=>r.every(p=>inPoly(p,pl)&&edgeDist(p)>=4);
+const place=(u0,u1,v0,v1,pl,a)=>{for(let k=0;k<20;k++){const r=R(u0+k,u1,v0,v1);if(fits(r,pl)){poly(r,a);return r;}}return null;};
+const bld={fill:'#fffaf0',stroke:'#7d6230','stroke-width':.7,filter:'url(#sh)'};
+const hotel=place(-40,-20,-196,-158,Lx.hub,bld);
+const mall=place(-50,-20,-146,-100,Lx.hub,bld);
+const hubPk=place(-56,-20,-92,-66,Lx.hub,{fill:CL.park});
+if(hubPk){const u0=hubPk[0][0],u1=hubPk[1][0],v0=hubPk[0][1],v1=hubPk[2][1];for(let v=v0+1;v<v1;v+=2.6){line([[u0+1,v],[u0+6,v]],{stroke:'#fff','stroke-width':.25});line([[u1-6,v],[u1-1,v]],{stroke:'#fff','stroke-width':.25});}}
+// institutional: school + healthcare
+const school=place(-56,-22,-51,-31,Lx.inst,bld);
+const clinic=place(-16,5,-51,-31,Lx.inst,bld);
+// ---------- plots ----------
+const PF={'500':CL.p500,'400':CL.p400,'250':CL.p250};
+Lx.plots.forEach(p=>{poly(p.r,{fill:PF[p.t],stroke:'#a99561','stroke-width':.4});
  const [u0,v0]=p.r[0],u1=p.r[1][0],v1=p.r[2][1];const front=p.f==='E'?[u0+3.5,u1-5]:[u0+5,u1-3.5];
- el('path',{d:dP(R(front[0],front[1],v0+1.6,v1-1.6)),fill:'#fffdf8',stroke:'#bfae80','stroke-width':.3},null,G);});
-// park: lake + clubhouse + pool + paths
-const pk=Lx.park,[pu0,pv0]=pk[0],pu1=pk[1][0],pv1=pk[2][1];
-el('path',{d:dP(pk),fill:'url(#lawn)'},null,G);
-const club=R(pu0+8,pu1-8,pv0+5,pv0+30);el('path',{d:dP(R(pu0+3,pu1-3,pv0+2,pv0+37)),fill:'url(#pav)'},null,G);
-el('path',{d:dP(R(pu0+8,(pu0+pu1)/2+6,pv0+6,pv0+24)),fill:'#fffaf0',stroke:'#7d6230','stroke-width':.7,filter:'url(#sh)'},null,G);
-el('path',{d:dP(R((pu0+pu1)/2+10,pu1-8,pv0+8,pv0+22)),fill:'url(#wat)',stroke:'#fff','stroke-width':.8},null,G);
-const lk=[[pu0+10,pv0+52],[(pu0+pu1)/2,pv0+44],[pu1-9,pv0+55],[pu1-14,pv1-14],[(pu0+pu1)/2+4,pv1-9],[pu0+12,pv1-20]];
-const L2=X(lk);let ld=`M${(L2[0][0]+L2[1][0])/2} ${(L2[0][1]+L2[1][1])/2}`;for(let i=1;i<=L2.length;i++){const a=L2[i%L2.length],b=L2[(i+1)%L2.length];ld+=` Q${a[0]} ${a[1]} ${(a[0]+b[0])/2} ${(a[1]+b[1])/2}`;}
-el('path',{d:ld,fill:'url(#wat)',stroke:'#eaf6fa','stroke-width':1.2},null,G);
-// trees
+ rect(front[0],front[1],v0+1.6,v1-1.6,{fill:'#fffdf8',stroke:'#bfae80','stroke-width':.3});});
+// ---------- central park: clubhouse, pool, lake, walk ----------
+const pk=Lx.park,[pu0,pv0]=pk[0],pu1=pk[1][0],pv1=pk[2][1],cb=Lx.club;
+poly(pk,{fill:'url(#lawn)'});
+poly(cb,{fill:'url(#pav)'});
+rect(pu0+7,(pu0+pu1)/2+6,pv0+6,pv0+25,{fill:'#fbf4ff',stroke:'#6b4e7d','stroke-width':.8,filter:'url(#sh)'});
+rect((pu0+pu1)/2+10,pu1-8,pv0+8,pv0+23,{fill:'url(#wat)',stroke:'#fff','stroke-width':.8});
+const lk=[[pu0+10,pv0+50],[(pu0+pu1)/2,pv0+44],[pu1-9,pv0+52],[pu1-13,pv1-13],[(pu0+pu1)/2+4,pv1-8],[pu0+12,pv1-18]];
+const blob=(pts)=>{const L2=X(pts);let d=`M${(L2[0][0]+L2[1][0])/2} ${(L2[0][1]+L2[1][1])/2}`;for(let i=1;i<=L2.length;i++){const a=L2[i%L2.length],b=L2[(i+1)%L2.length];d+=` Q${a[0]} ${a[1]} ${(a[0]+b[0])/2} ${(a[1]+b[1])/2}`;}return d;};
+el('path',{d:blob([[pu0+5,pv0+41],[pu1-5,pv0+41],[pu1-4,pv1-4],[pu0+4,pv1-4]]),fill:'none',stroke:'#e9dcc0','stroke-width':1.8},null,G);
+el('path',{d:blob(lk),fill:'url(#wat)',stroke:'#eaf6fa','stroke-width':1.2},null,G);
+// ---------- arrival green: pond, pavilion, meandering walk ----------
+const ar=Lx.arrival;let pond=[];const arU=v=>{const us=[];for(let i=0;i<ar.length;i++){const a=ar[i],b=ar[(i+1)%ar.length];if((v-a[1])*(v-b[1])<=0&&a[1]!==b[1])us.push(a[0]+(v-a[1])/(b[1]-a[1])*(b[0]-a[0]));}return [Math.min(...us),Math.max(...us)];};
+{const pv=-104,[pa,pb]=arU(pv),pc=(pa+pb)/2+1;pond=[[pc-7,pv-14],[pc+5,pv-16],[pc+8,pv-2],[pc+4,pv+12],[pc-6,pv+13],[pc-8,pv]];const walk=[];for(let v=-170;v<=-8;v+=6){const [a,b]=arU(v);walk.push([a+(b-a)*(.45+.22*Math.sin(v/19)),v]);}
+ line(walk,{stroke:'#e9dcc0','stroke-width':1.8,'stroke-linecap':'round','stroke-linejoin':'round'});
+ el('path',{d:blob(pond),fill:'url(#wat)',stroke:'#eaf6fa','stroke-width':1},null,G);
+ const g=xy(...(()=>{const [a2,b2]=arU(-48);return [(a2+b2)/2+1,-48];})());el('circle',{cx:g[0],cy:g[1],r:3.4,fill:'#fffaf0',stroke:'#7d6230','stroke-width':.6,filter:'url(#sh)'},null,G);
+ // project name monolith facing the boulevard
+ const [a3]=arU(-150);rect(a3+3,a3+4.4,-158,-142,{fill:'#9a7b3c'});}
+// ---------- trees ----------
 let seed=11;const rnd=()=>{seed=(seed*16807)%2147483647;return seed/2147483647;};
-const blocked=p=>Lx.roads.some(r=>inPoly(p,r.pts))||inPoly(p,Lx.blvdPoly)||Lx.plots.some(q=>p[0]>=q.r[0][0]&&p[0]<=q.r[1][0]&&p[1]>=q.r[0][1]&&p[1]<=q.r[2][1])||Lx.com.some(q=>inPoly(p,q.r))||Math.hypot(p[0]-Lx.RB.c[0],p[1]-Lx.RB.c[1])<Lx.RB.r+2;
+const inR=(p,r)=>p[0]>=r[0][0]&&p[0]<=r[1][0]&&p[1]>=r[0][1]&&p[1]<=r[2][1];
+const blocked=p=>Lx.roads.some(r=>inPoly(p,r.pts))||Lx.plots.some(q=>inR(p,q.r))||Lx.com.some(q=>inR(p,q.r))||inPoly(p,Lx.hub)||inPoly(p,Lx.inst)||inR(p,cb)||Math.hypot(p[0]-Lx.RB.c[0],p[1]-Lx.RB.c[1])<Lx.RB.r+2||inPoly(p,lk)||(pond.length&&inPoly(p,pond))||inR(p,R(Lx.plaza[0][0]-6,Lx.plaza[1][0]+6,Lx.plaza[0][1],Lx.plaza[2][1]));
 const tree=(u,v,r,k)=>{const p=xy(u,v);el('circle',{cx:p[0]+r*.3,cy:p[1]+r*.4,r,fill:'#2b3a1f',opacity:.25},null,G);el('circle',{cx:p[0],cy:p[1],r,fill:`url(#${k||'t1'})`},null,G);};
-// avenue trees on 60 ft + 40 ft verges (in road edge footpath)
-const c1=Lx.col.R1;for(let v=Lx.RB.c[1]+Lx.RB.r+6;v<690;v+=9){[c1.u0+1.2,c1.u1-1.2].forEach(u=>{if(inTown([u,v])&&edgeDist([u,v])>2)tree(u,v,2.1,'t1');});}
-// boulevard trees (median + edges) with flowering trees on median
-for(let t=0.08;t<0.93;t+=0.035){const u=bl[0][0]+(bl[1][0]-bl[0][0])*t,v=bl[0][1]+(bl[1][1]-bl[0][1])*t;tree(u,v,1.9,'t3');[-1,1].forEach(s=>{const q=[u+s*14,v];if(inPoly(q,Q))tree(q[0],q[1],2.2,'t1');});}
-// fill landscape pockets (belt + leftovers) with trees
-for(let i=0;i<6000;i++){const u=-70+rnd()*370,v=-250+rnd()*940,p=[u,v];if(!inTown(p)||blocked(p))continue;if(edgeDist(p)<1.5)continue;
- if(u>=pu0&&u<=pu1&&v>=pv0&&v<=pv0+40)continue;if(inPoly(p,lk))continue;if(inPoly(p,Lx.armCom)||inPoly(p,Lx.inst)||inPoly(p,Lx.gate))continue;
- if(rnd()<0.55)tree(u,v,1.6+rnd()*1.6,rnd()<.5?'t1':'t2');}
-// arm rear: commercial hub + parking, institutional block
-const box=(r,f,st,poly)=>{const rr=r.filter?r:r;const ok=r.every(p=>inPoly(p,poly)&&edgeDist(p)>=2.5);if(ok)el('path',{d:dP(r),fill:f,stroke:st,'stroke-width':.7,filter:st?'url(#sh)':null},null,G);return ok;};
-for(let v=-215;v<-70;v+=4){const r=R(-60,-8,v,v+4);const cl=GEO.clipHalf(GEO.clipHalf(r,p=>p[0]-(-60)),p=>1);}
-[[-46,-12,-150,-80,'#fffaf2','#a07a58'],[-40,-12,-205,-158,'url(#pav)',null],[-52,-12,-54,-22,'#fff','#9a3c58']].forEach(([a,b,c,d,f,st])=>{for(let k=0;k<12;k++){const sh=k*2;if(box(R(a+sh,b,c,d),f,st,Q))break;}});
-// campus (indicative)
-const CMP=[[R(uS-70,uS-16,30,110),'b'],[R(uS-140,uS-84,30,70),'b'],[R(uS-140,uS-84,80,110),'b'],[R(uS-140,uS-30,130,220),'q'],[R(uS-170,uS-40,250,440),'f'],[R(uS-150,uS-100,460,500),'b'],[R(uS-90,uS-40,460,520),'b'],[R(uS-60,uS-16,-8,20),'p']];
+const palm=(u,v)=>{const p=xy(u,v);const g=el('g',{transform:`translate(${p[0]} ${p[1]})`},null,G);for(let i=0;i<7;i++){const a=i/7*Math.PI*2;el('path',{d:`M0 0 Q${Math.cos(a+.4)*1.6} ${Math.sin(a+.4)*1.6} ${Math.cos(a)*2.6} ${Math.sin(a)*2.6}`,stroke:'#3f7a34','stroke-width':.7,fill:'none','stroke-linecap':'round'},null,g);}el('circle',{r:.6,fill:'#6d5a35'},null,g);};
+// palms + flowering trees on the boulevard median, shade trees on its footpaths
+for(let v=bv0+5,i=0;v<bv1-Lx.RB.r-2;v+=7,i++){if(i%2)tree(UC,v,1.9,'t3');else palm(UC,v);[-1,1].forEach(s=>tree(UC+s*14.1,v+3.5,1.9,'t1'));}
+for(let v=gV-55;v<gV-4;v+=8)[-1,1].forEach(s=>{const q=[UC+s*27,v];if(inPoly(q,Q)&&edgeDist(q)>2.5&&!blocked(q))palm(q[0],q[1]);});
+// avenue trees on the 60 ft and 40 ft verges
+const c1=Lx.col.R1;for(let v=Lx.RB.c[1]+Lx.RB.r+6;v<Lx.loopV(c1.u0)-8;v+=9)[c1.u0+1.1,c1.u1-1.1].forEach(u=>{if(edgeDist([u,v])>2&&!Lx.cross.some(c=>v>c-3&&v<c+12.19+3))tree(u,v,2.1,'t1');});
+// landscape pockets
+for(let i=0;i<9000;i++){const u=-70+rnd()*370,v=-280+rnd()*980,p=[u,v];if(!inTown(p)||blocked(p))continue;if(edgeDist(p)<1.4)continue;
+ if(inR(p,R(Lx.plaza[0][0]-6,Lx.plaza[1][0]+6,Lx.plaza[0][1],Lx.plaza[2][1])))continue;
+ if(rnd()<0.5)tree(u,v,1.5+rnd()*1.6,rnd()<.15?'t4':rnd()<.5?'t1':'t2');}
+// ---------- campus (indicative) ----------
+const CMP=[[R(uS-70,uS-16,30,110),'b'],[R(uS-140,uS-84,30,70),'b'],[R(uS-140,uS-84,80,110),'b'],[R(uS-140,uS-30,130,220),'q'],[R(uS-170,uS-40,250,440),'f'],[R(uS-150,uS-100,460,500),'b'],[R(uS-90,uS-40,460,520),'b']];
 CMP.forEach(([r,t])=>{if(!r.every(p=>inPoly(p,UNI)))return;
- if(t==='b')el('path',{d:dP(r),fill:'#fbf8f1',stroke:'#7a6a4a','stroke-width':.6,filter:'url(#sh)'},null,G);
- if(t==='q')el('path',{d:dP(r),fill:'url(#lawn)',stroke:'#ece2c9','stroke-width':1.5},null,G);
- if(t==='p')el('path',{d:dP(r),fill:'url(#pav)'},null,G);
- if(t==='f'){el('path',{d:dP(r),fill:'#a9cc86',stroke:'#fff','stroke-width':1},null,G);}});
-// outlines
+ if(t==='b')poly(r,{fill:'#fbf8f1',stroke:'#7a6a4a','stroke-width':.6,filter:'url(#sh)'});
+ if(t==='q')poly(r,{fill:'url(#lawn)',stroke:'#ece2c9','stroke-width':1.5});
+ if(t==='f')poly(r,{fill:'#a9cc86',stroke:'#fff','stroke-width':1});});
+// ---------- outlines ----------
 el('path',{d:dP(UNI),fill:'none',stroke:'#6b5226','stroke-width':1.3,'stroke-dasharray':'6 3'});
 el('path',{d:dP(Q),fill:'none',stroke:'#2d2414','stroke-width':2.4});
-// plot numbers
+// ---------- labels ----------
 let n=0;const order=[...Lx.plots].sort((a,b)=>a.col<b.col?-1:a.col>b.col?1:a.r[0][1]-b.r[0][1]);
-order.forEach(p=>{n++;const c=xy((p.r[0][0]+p.r[1][0])/2,(p.r[0][1]+p.r[2][1])/2);el('text',{x:c[0],y:c[1]+1,'font-size':2.6,'text-anchor':'middle',fill:'#7a6534',transform:`rotate(17 ${c[0]} ${c[1]})`},String(n));});
-// numbered callouts (placed in open areas, no overlap)
-const KEY=[];const call=(u,v,label)=>{KEY.push(label);const p=xy(u,v);el('circle',{cx:p[0],cy:p[1],r:6,fill:'#3d3a30',stroke:'#fff','stroke-width':1.2});el('text',{x:p[0],y:p[1]+2.6,'font-size':7.2,'font-weight':'bold','text-anchor':'middle',fill:'#fff'},String(KEY.length));};
-call(gc[0],gc[1]-14,'Gateway plaza, gatehouses and fountain (entry from road 1550)');
-call(bl[0][0]-8,-180,'100 ft palm boulevard with a flowering median');
-call(bl[0][0]+(bl[1][0]-bl[0][0])*0.6+30,-140,'High-street SCO shops with forecourt parking');
-call(-24,-115,'Commercial hub: retail, F&B and boutique hotel');
-call(-30,-38,'Institutional block: healthcare and school');
-call(Lx.RB.c[0],Lx.RB.c[1],'Landmark roundabout');
-call(uS-40,-2,'University campus gate');
-call(uS-110,170,'University campus, 25 acres (indicative)');
-call((pu0+pu1)/2-10,pv0+15,'Clubhouse with pool, gym and banquet');
-call((pu0+pu1)/2,(pv0+pv1)/2+20,'Central park and lake');
+order.forEach(p=>{n++;text((p.r[0][0]+p.r[1][0])/2,(p.r[0][1]+p.r[2][1])/2+.2,String(n),{'font-size':3,fill:'#7a6534'});});
+Lx.com.forEach((c,i)=>text((c.r[0][0]+c.r[1][0])/2+(c.side<0?-1:1),(c.r[0][1]+c.r[2][1])/2,'S'+(i+1),{'font-size':2.6,fill:'#8a5a3a'}));
+// road names
+const rlab=(u,v,s,vert)=>text(u,v,s,{'font-size':3.1,'font-weight':'bold',fill:'#fff','letter-spacing':.5,rot:vert?VROT:ROT});
+rlab(UC-8,-120,"100' BOULEVARD",true);rlab(UC+8,-120,"100' BOULEVARD",true);
+rlab((c1.u0+c1.u1)/2,95,"60' AVENUE",true);rlab((c1.u0+c1.u1)/2,465,"60' AVENUE",true);
+['R2','R3'].forEach(k=>{const c=Lx.col[k];rlab((c.u0+c.u1)/2,95,"40' ROAD",true);rlab((c.u0+c.u1)/2,440,"40' ROAD",true);});
+rlab((Lx.col.R4.u0+Lx.col.R4.u1)/2,440,"40' ROAD",true);
+Lx.cross.forEach(v=>rlab(Lx.col.C.u1+4,v+6.1,"40' ROAD"));
+rlab((Lx.col.D.u0+Lx.col.E.u1)/2,(Lx.NL[0]+Lx.NL[1])/2,"40' NORTH LINK");
+{const u=(Lx.col.C.u0+Lx.col.D.u1)/2,v=Lx.loopV(u),u2=u+20,v2=Lx.loopV(u2);const a=xy(u,v),b=xy(u2,v2);const ang=Math.atan2(b[1]-a[1],b[0]-a[0])*180/Math.PI;
+  el('text',{x:a[0],y:a[1],'font-size':3.1,'font-weight':'bold',fill:'#fff','letter-spacing':.5,'text-anchor':'middle','dominant-baseline':'middle',transform:`rotate(${ang} ${a[0]} ${a[1]})`},"40' SOUTH LOOP",G);}
+// ---------- numbered callouts ----------
+const KEY=[];const call=(u,v,label)=>{KEY.push(label);const p=xy(u,v);el('circle',{cx:p[0],cy:p[1],r:5.6,fill:'#3d3a30',stroke:'#fff','stroke-width':1.1});el('text',{x:p[0],y:p[1]+2.4,'font-size':6.6,'font-weight':'bold','text-anchor':'middle',fill:'#fff'},String(KEY.length));};
+const ctr=r=>[(r[0][0]+r[1][0])/2,(r[0][1]+r[2][1])/2];
+call(UC+33,gV-14,'Main gate: gatehouses, security island and entry walls (from road 1550)');
+call(UC,-205,'100 ft boulevard with palm and flowering median');
+call(UC-15.24-6-9.14,-205,'High-street SCO shops with forecourt parking');
+call(...ctr(Lx.plaza),'Shop plaza with fountain');
+if(hotel)call(...ctr(hotel),'Boutique hotel');
+if(mall)call(...ctr(mall),'Commercial hub: retail and F&B');
+if(school)call(...ctr(school),'School');
+if(clinic)call(...ctr(clinic),'Healthcare centre');
+call(Lx.RB.c[0]+Lx.RB.r+7,Lx.RB.c[1],'Landmark roundabout with fountain');
+call(cg[0]-12,cg[1]+8,'University campus gate');
+call(uS-110,170,'University campus, 25 acres (indicative, by others)');
+{const [a,b]=arU(-75);call((a+b)/2,-75,'Arrival green: pond, pavilion and walking loop');}
+call((pu0+pu1)/2-6,pv0+15,'Clubhouse with pool, gym and banquet');
+call((pu0+pu1)/2,(pv0+pv1)/2+14,'Central park and lake');
 call((c1.u0+c1.u1)/2,250,'60 ft tree-lined avenue');
-call(Lx.col.R2.u0+6,Lx.cross[0]+6,'40 ft streets');
-call(54,-30,'Arrival green');
-call(225,640,'Perimeter woodland and jogging trail');
+call(Lx.col.R4.u1+12,Lx.cross[2]+6,'40 ft internal roads');
+call(225,655,'Perimeter green belt and jogging trail');
 document.getElementById('key').innerHTML=KEY.map((k,i)=>`<li><b>${i+1}</b><span>${k}</span></li>`).join('');
-// north arrow + scale (svg units = metres)
-const vb=svg.viewBox.baseVal;const nx=vb.x+vb.width-30,ny=vb.y+30;
+// ---------- north arrow, scale ----------
+const nx=vx+W-28,ny=vy+30;
 el('circle',{cx:nx,cy:ny,r:14,fill:'#fff',stroke:'#3d3a30','stroke-width':1});el('path',{d:`M${nx},${ny-12} l6,18 l-6,-5 l-6,5 z`,fill:'#3d3a30'});el('text',{x:nx,y:ny+26,'font-size':9,'text-anchor':'middle','font-family':'Georgia'},'N');
-const sx=vb.x+16,sy=vb.y+vb.height-20;[0,1,2,3,4].forEach(i=>el('rect',{x:sx+i*20,y:sy,width:20,height:4,fill:i%2?'#fff':'#3d3a30',stroke:'#3d3a30','stroke-width':.5}));
-[0,50,100].forEach((m,i)=>el('text',{x:sx+m,y:sy+13,'font-size':7,'text-anchor':'middle'},m+(m===100?' m':'')));
-// plot-size legend on plan
-const lgx=vb.x+16,lgy=vb.y+16;
-[['500 sq yd plot',PF['500']],['400 sq yd plot',PF['400']],['250 sq yd plot',PF['250']],['Commercial / SCO','#f7e6d3'],['Institutional','#efd3d9'],['Parks and landscape','#bcd796'],['University (by others)','#e7dfcd']].forEach(([t,c],i)=>{el('rect',{x:lgx,y:lgy+i*12,width:9,height:9,fill:c,stroke:'#555','stroke-width':.4});el('text',{x:lgx+13,y:lgy+i*12+7.5,'font-size':7.5},t);});
+const sx=vx+W-130,sy=vy+H-22;[0,1,2,3,4].forEach(i=>el('rect',{x:sx+i*20,y:sy,width:20,height:4,fill:i%2?'#fff':'#3d3a30',stroke:'#3d3a30','stroke-width':.5}));
+[0,50,100].forEach(m=>el('text',{x:sx+m,y:sy+13,'font-size':7,'text-anchor':'middle'},m+(m===100?' m':'')));
+el('text',{x:sx+50,y:sy-6,'font-size':7,'text-anchor':'middle',fill:'#555'},'SCALE 1:2000 at A2');
+// ---------- legend ----------
+const lg=el('g',{transform:`translate(${vx+12} ${vy+12})`});
+const items=[
+ ['h','LEGEND'],
+ ['s','500 sq yd plot (50×90 ft)',CL.p500],['s','400 sq yd plot (40×90 ft)',CL.p400],['s','250 sq yd plot (30×75 ft)',CL.p250],
+ ['s','SCO shop lot (30×60 ft)',CL.sco],['s','Commercial hub and hotel',CL.hub],['s','Institutional',CL.inst],['s','Clubhouse and amenities',CL.club],
+ ['s','Parks and landscape','url(#lawn)'],['s','Water body','url(#wat)'],['s','University campus (by others)','url(#hatch)'],
+ ['g','ROADS'],['r','100 ft boulevard',CL.r100],['r','60 ft avenue',CL.r60],['r','40 ft road',CL.r40],['r','Service lane (20 ft)',CL.lane],['r','Parking',CL.park],['s','Footpath / plaza','url(#pav)'],
+ ['g','SYMBOLS'],['t','Trees and palms'],['j','Jogging trail'],['b','Site boundary'],['u','University boundary'],['n','Plot number / shop number']];
+let yy=0;const LW=118;const bg=el('rect',{x:-6,y:-6,width:LW,height:10,fill:'#fffdf7',stroke:'#3d3a30','stroke-width':.6,opacity:.96},null,lg);
+items.forEach(([t,s,c])=>{
+ if(t==='h'){el('text',{x:0,y:yy+7,'font-size':8.5,'font-family':'Georgia','letter-spacing':1.5,fill:'#7d6230'},s,lg);yy+=13;return;}
+ if(t==='g'){el('line',{x1:0,x2:LW-12,y1:yy+2,y2:yy+2,stroke:'#e2d8bd','stroke-width':.6},null,lg);el('text',{x:0,y:yy+10,'font-size':6.5,'letter-spacing':1,fill:'#8a7650'},s,lg);yy+=14;return;}
+ if(t==='s')el('rect',{x:0,y:yy,width:12,height:8,fill:c,stroke:'#555','stroke-width':.4},null,lg);
+ if(t==='r'){el('rect',{x:0,y:yy+1,width:12,height:6,fill:c},null,lg);el('line',{x1:1,x2:11,y1:yy+4,y2:yy+4,stroke:'#f4f0e4','stroke-width':.4,'stroke-dasharray':'2 1.5'},null,lg);}
+ if(t==='t'){[[3,4,'t1'],[9,4,'t3']].forEach(([x,y,k])=>el('circle',{cx:x,cy:yy+y,r:3,fill:`url(#${k})`},null,lg));}
+ if(t==='j'){el('line',{x1:0,x2:12,y1:yy+4,y2:yy+4,stroke:CL.trail,'stroke-width':3},null,lg);el('line',{x1:0,x2:12,y1:yy+4,y2:yy+4,stroke:'#cdb27c','stroke-width':3,'stroke-dasharray':'.3 2'},null,lg);}
+ if(t==='b')el('line',{x1:0,x2:12,y1:yy+4,y2:yy+4,stroke:'#2d2414','stroke-width':2},null,lg);
+ if(t==='u')el('line',{x1:0,x2:12,y1:yy+4,y2:yy+4,stroke:'#6b5226','stroke-width':1.2,'stroke-dasharray':'4 2'},null,lg);
+ if(t==='n'){el('rect',{x:0,y:yy,width:12,height:8,fill:CL.p400,stroke:'#a99561','stroke-width':.4},null,lg);el('text',{x:6,y:yy+6,'font-size':5,'text-anchor':'middle',fill:'#7a6534'},'12',lg);}
+ el('text',{x:17,y:yy+6.6,'font-size':7.2,fill:'#23241f'},s,lg);yy+=11;});
+bg.setAttribute('height',yy+8);
 // ---------- tables ----------
-const ha=Lx.ha,NET=Lx.NET,sy2=h=>Math.round(h*1e4/0.83613).toLocaleString('en-IN'),ac=h=>(h/0.40468564).toFixed(2);
-document.getElementById('site').innerHTML=`<tr><td>Gross site</td><td>28.40 ha</td><td>70.18 ac</td></tr><tr><td>University campus (west)</td><td>${ha.uni.toFixed(2)} ha</td><td>${ac(ha.uni)} ac</td></tr><tr class="tot"><td>Township, net</td><td>${NET.toFixed(2)} ha</td><td>${ac(NET)} ac</td></tr>`;
-const rows=[['Residential plots','#ecd29b',ha.plot,50],['Roads and circulation','#7d7b75',ha.road,25],['Parks, green and landscape','#bcd796',ha.green,15],['Commercial, institutional and club','#f1dcc6',ha.com+ha.amen,10]];
-document.getElementById('lu').innerHTML='<tr><th>Use</th><th>ha</th><th>sq yd</th><th>%</th><th>Target</th></tr>'+rows.map(([t,c,h,tg])=>`<tr><td><span class="sw" style="background:${c}"></span>${t}</td><td>${h.toFixed(2)}</td><td>${sy2(h)}</td><td><b>${(h/NET*100).toFixed(1)}%</b></td><td>${tg}%</td></tr>`).join('')+`<tr class="tot"><td>Total</td><td>${NET.toFixed(2)}</td><td>${sy2(NET)}</td><td>100%</td><td>100%</td></tr>`;
+const sqm=h=>h*1e4,sy2=h=>Math.round(h*1e4/0.83612736).toLocaleString('en-IN'),ac=h=>(h/0.40468564).toFixed(2),NET=Lx.NET;
+const sum=o=>Object.values(o).reduce((a,b)=>a+b,0);
+document.getElementById('site').innerHTML=`<tr><th>Item</th><th>ha</th><th>acres</th><th>sq yd</th><th>% of gross</th></tr>
+<tr><td>Gross site (traced, BhuNaksha)</td><td>28.40</td><td>${ac(28.4)}</td><td>${sy2(28.4)}</td><td>100%</td></tr>
+<tr><td>University campus (west)</td><td>${A.uni.toFixed(2)}</td><td>${ac(A.uni)}</td><td>${sy2(A.uni)}</td><td>${(A.uni/28.4*100).toFixed(1)}%</td></tr>
+<tr class="tot"><td>Township, net</td><td>${NET.toFixed(2)}</td><td>${ac(NET)}</td><td>${sy2(NET)}</td><td>${(NET/28.4*100).toFixed(1)}%</td></tr>`;
+const plotHa=sum(A.plot),roadHa=sum(A.road);
+const groups=[
+ ['1','Residential plots (sellable)',CL.p500,[['500 sq yd plots',A.plot['500']],['400 sq yd plots',A.plot['400']],['250 sq yd plots',A.plot['250']]]],
+ ['2','Commercial (sellable)',CL.sco,[['SCO shop lots',A.sco],['Commercial hub and hotel',A.hub]]],
+ ['3','Public and semi-public',CL.inst,[['Institutional: school and healthcare',A.inst],['Clubhouse and amenities',A.club]]],
+ ['4','Roads and circulation',CL.r60,[['100 ft boulevard, gate plaza, roundabout',A.road['100']],['60 ft avenue',A.road['60']],['40 ft roads (incl. north link, south loop, campus link)',A.road['40']],['Service lane',A.road.lane],['Parking forecourts',A.road.park]]],
+ ['5','Parks and open space',CL.green,[['Central park and lake',A.park],['Arrival green, green belt and landscape',A.green]]]];
+const row=(cls,lab,h,sw)=>`<tr class="${cls}"><td>${sw?`<span class="sw" style="background:${sw}"></span>`:''}${lab}</td><td>${h.toFixed(3)}</td><td>${ac(h)}</td><td>${sy2(h)}</td><td>${(h/NET*100).toFixed(2)}%</td></tr>`;
+let lu='<tr><th>Use</th><th>ha</th><th>acres</th><th>sq yd</th><th>% of net</th></tr>';let tot=0;
+groups.forEach(([no,t,c,rows])=>{const h=rows.reduce((s,r)=>s+r[1],0);tot+=h;lu+=row('grp',no+'. '+t,h,c);rows.forEach(([l,v])=>lu+=row('sub',l,v));});
+lu+=row('tot','Total township',tot);
+const sell=plotHa+A.sco+A.hub;
+lu+=row('hl','Sellable area (1 + 2)',sell);
+lu+=`<tr class="hl"><td>Plotted residential: % of gross site</td><td></td><td></td><td></td><td>${(plotHa/28.4*100).toFixed(2)}%</td></tr>`;
+document.getElementById('lu').innerHTML=lu;
 const nn=Lx.n,T=nn['500']+nn['400']+nn['250'],pp=x=>(x/T*100).toFixed(0)+'%';
-document.getElementById('ps').innerHTML=`<tr><th>Type</th><th>Size</th><th>Nos</th><th>Share</th><th>Target</th><th>sq yd</th></tr>
-<tr><td><span class="sw" style="background:#ecd29b"></span>Hill-view (west)</td><td>500 sq yd</td><td>${nn['500']}</td><td>${pp(nn['500'])}</td><td>40%</td><td>${(nn['500']*500).toLocaleString('en-IN')}</td></tr>
-<tr><td><span class="sw" style="background:#f3e1b6"></span>Garden (central)</td><td>400 sq yd</td><td>${nn['400']}</td><td>${pp(nn['400'])}</td><td>30%</td><td>${(nn['400']*400).toLocaleString('en-IN')}</td></tr>
-<tr><td><span class="sw" style="background:#faf0d8"></span>Courtyard (east)</td><td>250 sq yd</td><td>${nn['250']}</td><td>${pp(nn['250'])}</td><td>30%</td><td>${(nn['250']*250).toLocaleString('en-IN')}</td></tr>
-<tr class="tot"><td>Residential total</td><td></td><td>${T}</td><td>100%</td><td></td><td>${(nn['500']*500+nn['400']*400+nn['250']*250).toLocaleString('en-IN')}</td></tr>
-<tr><td>Commercial SCO lots</td><td>200 sq yd</td><td>${Lx.com.length}</td><td></td><td></td><td>${(Lx.com.length*200).toLocaleString('en-IN')}</td></tr>`;
+const PS=[['500','50 × 90','15.24 × 27.43',500,CL.p500],['400','40 × 90','12.19 × 27.43',400,CL.p400],['250','30 × 75','9.14 × 22.86',250,CL.p250]];
+document.getElementById('ps').innerHTML=`<tr><th>Type</th><th>Size ft</th><th>Size m</th><th>Nos</th><th>Mix</th><th>sq yd</th><th>ha</th></tr>`+
+ PS.map(([t,f,m,sq,c])=>`<tr><td><span class="sw" style="background:${c}"></span>${t} sq yd</td><td>${f}</td><td>${m}</td><td>${nn[t]}</td><td>${pp(nn[t])}</td><td>${(nn[t]*sq).toLocaleString('en-IN')}</td><td>${A.plot[t].toFixed(3)}</td></tr>`).join('')+
+ `<tr class="tot"><td>Residential total</td><td></td><td></td><td>${T}</td><td>100%</td><td>${(nn['500']*500+nn['400']*400+nn['250']*250).toLocaleString('en-IN')}</td><td>${plotHa.toFixed(3)}</td></tr>
+ <tr><td><span class="sw" style="background:${CL.sco}"></span>SCO shop lot</td><td>30 × 60</td><td>9.14 × 18.29</td><td>${Lx.com.length}</td><td></td><td>${(Lx.com.length*200).toLocaleString('en-IN')}</td><td>${A.sco.toFixed(3)}</td></tr>`;
+document.getElementById('note').innerHTML=`Plots and shop lots are drawn at their exact sold sizes and their areas are calculated from those sizes. Zone areas are exact polygon areas, scaled to the 28.40 ha traced site (factor ${K.toFixed(4)}). Roads are measured on a 0.5 m grid so junctions are counted once. Open space is the balance, so the area statement adds up to the net township exactly. The campus layout is indicative and by others. The boundary is traced from BhuNaksha. The south-west edge and plots 1510 and 1513 need a patwari demarcation and a DGPS survey before approval. Check against the current Rajasthan Township Policy and the land-conversion order.`;
+document.getElementById('dt').textContent=new Date().toLocaleDateString('en-GB',{day:'numeric',month:'short',year:'numeric'});
 window.__done=true;
 </script></body></html>
