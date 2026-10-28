@@ -200,7 +200,9 @@ const PRESETS={
   grey:{name:'Contemporary',desc:'Grey and charcoal, brick base, MS railing, grey tile',o:{wall:'grey',accent:'charcoal',clad:'brick',balfin:'accent',balcony:'rail',wallh:'2',win:'box',tile:'grey',frame:'black',bay:true}}
 };
 let O=Object.assign({},PRESETS.built.o,{nb:false,cw:true,sun:30});
-try{const s=JSON.parse(localStorage.getItem('villa3d-opts')||'null');if(s)Object.assign(O,s);}catch(e){}
+// bump STORE when the design changes so viewers see the new defaults instead of an older saved setup
+const STORE='villa3d-opts-v3';
+try{const s=JSON.parse(localStorage.getItem(STORE)||'null');if(s)Object.assign(O,s);}catch(e){}
 
 /* ---------- Renderer / scene ---------- */
 const canvas=document.getElementById('c');
@@ -570,7 +572,7 @@ function sync(){
   document.querySelectorAll('.preset').forEach(b=>{const p=PRESETS[b.dataset.p].o;b.setAttribute('aria-pressed',String(Object.keys(p).every(k=>p[k]===O[k])));});
   document.getElementById('spec').textContent=specText();
 }
-function save(){try{localStorage.setItem('villa3d-opts',JSON.stringify(O));}catch(e){}}
+function save(){try{localStorage.setItem(STORE,JSON.stringify(O));}catch(e){}}
 function changed(geom){applyMaterials();if(geom)rebuild();sync();save();}
 document.getElementById('copy').addEventListener('click',()=>{const t=specText(),ok=document.getElementById('copied');
   const sel=()=>{const r=document.createRange();r.selectNodeContents(document.getElementById('spec'));const s=getSelection();s.removeAllRanges();s.addRange(r);};
