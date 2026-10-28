@@ -10,6 +10,11 @@ What comes from the drawing:
 - Levels from section X-X: 3.66 m floor to floor, terrace at 7.32 m, parapet 1.14 m, stair headroom (mumty) roof at 10.16 m.
 - Openings: D 1.5, D1 1.07, D2 0.9 and D3 0.76 m wide; W 1.8 × 1.22, W1 1.22 × 1.22 and V 0.61 × 0.61 m. Sills are at 0.99 m and lintels at 2.21 m. Chajjas are 0.45 m deep, as on the elevations.
 
+Changed from the drawing to match site photos:
+- A terrace-level slab extends over the front balcony at the same 4.80 × 1.51 m, giving a covered balcony. Its parapet sits on the extension edge.
+- The first floor window onto the balcony is 1.83 m (6 ft) wide with 4 panes. The drawing shows W1 at 1.22 m.
+- The staircase side wall (right side, y 4.08–6.48 m) has two tall glazed openings. Estimated size: 1.75 m wide, 2.4–4.8 m and 6.2–9.2 m above floor level. The upper one rises into the mumty. The stairwell is left open in the floor and terrace slabs.
+
 Assumptions:
 - The plinth is modelled at 0.45 m. Section X-X gives 0.76 m from road level to ground level.
 - Interiors are not modelled.
