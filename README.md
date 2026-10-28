@@ -11,7 +11,7 @@ What comes from the drawing:
 - Openings: D 1.5, D1 1.07, D2 0.9 and D3 0.76 m wide; W 1.8 × 1.22, W1 1.22 × 1.22 and V 0.61 × 0.61 m. Sills are at 0.99 m and lintels at 2.21 m. Chajjas are 0.45 m deep, as on the elevations.
 
 Changed from the drawing to match site photos:
-- A terrace-level slab extends over the front balcony at the same 4.80 × 1.51 m, giving a covered balcony. Its parapet sits on the extension edge.
+- A terrace-level slab extends over the front balcony at the same 4.80 × 1.51 m, giving a covered balcony. The balcony and the extension share one guard design (from the client's reference photo): a 2 ft (0.61 m) wall with a 40 mm stone coping, then a 3 ft (0.91 m) MS angle railing. The railing has posts at most 1.6 m apart and six horizontal bars. A 3 ft wall is available as an option.
 - The first floor window onto the balcony is 1.83 m (6 ft) wide with 4 panes. The drawing shows W1 at 1.22 m.
 - The staircase side wall (right side, y 4.08–6.48 m) has two tall glazed openings. Estimated size: 1.75 m wide, 2.4–4.8 m and 6.2–9.2 m above floor level. The upper one rises into the mumty. The stairwell is left open in the floor and terrace slabs.
 
