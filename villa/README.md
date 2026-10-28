@@ -2,7 +2,7 @@
 
 `villa-3d.html` is an interactive 3D model of the G+1 duplex villa, for choosing the final elevation. Open it in a browser (it loads three.js r128 from a CDN).
 
-Source: `5bhk_Duplex_villa_modified_submission_plan.dwg` (AutoCAD 2018 format), converted with LibreDWG 0.13.3. Wall, opening and level coordinates were read from the converted file and typed into the page.
+Source: `5bhk_Duplex_villa_modified_submission_plan.dwg` (AutoCAD 2013 DWG format), converted with LibreDWG 0.13.3. Wall, opening and level coordinates were read from the converted file and typed into the page.
 
 What comes from the drawing:
 - Plot 10.67 × 16.00 m. Setbacks: front 3.00 m, right side 1.50 m, rear 1.73 m (only behind the kitchen). The building sits on the left boundary.
