@@ -119,7 +119,8 @@ dl.data dd{margin:0;text-align:right;font-variant-numeric:tabular-nums;font-weig
       <h2>Features</h2>
       <div class="row"><span class="lbl">Ground floor front cladding</span><div class="seg" id="seg-clad"></div></div>
       <div class="row"><span class="lbl">Balcony parapet finish</span><div class="seg" id="seg-balfin"></div></div>
-      <div class="row"><span class="lbl">Balcony guard</span><div class="seg" id="seg-balcony"></div></div>
+      <div class="row"><span class="lbl">Balcony and terrace extension guard</span><div class="seg" id="seg-balcony"></div></div>
+      <div class="row"><span class="lbl">Wall under the railing (railing 3 ft above)</span><div class="seg" id="seg-wallh"></div></div>
       <div class="row"><span class="lbl">Right-hand front windows</span><div class="seg" id="seg-win"></div></div>
       <div class="row"><span class="lbl">Sloped tile strip at roof</span><div class="seg" id="seg-tile"></div></div>
       <div class="row"><span class="lbl">Window frames</span><div class="seg" id="seg-frame"></div></div>
@@ -152,6 +153,7 @@ dl.data dd{margin:0;text-align:right;font-variant-numeric:tabular-nums;font-weig
         <dt>Parapet · mumty headroom</dt><dd>1.14 · 2.62 m</dd>
         <dt>Building height</dt><dd>10.16 m</dd>
         <dt>Front balcony + terrace extension</dt><dd>4.80 × 1.51 m</dd>
+        <dt>Balcony + extension guard</dt><dd>2 ft wall + 3 ft MS railing</dd>
         <dt>Balcony window (first floor)</dt><dd>1.83 m (6 ft), 4 panes</dd>
       </dl>
       <p class="hint">Walls 230 mm outer, openings and sill/lintel levels (sill 0.99, lintel 2.21 m) as drawn. Plinth is modelled at 0.45 m; section X-X shows 0.76 m from road to ground level. From the site photos: terrace extension over the balcony, the 6 ft balcony window, and two tall glazed openings on the staircase side wall (estimated 1.75 m wide, sills 2.4 and 6.2 m). Interiors are not modelled.</p>
@@ -185,16 +187,17 @@ const ACCENTS={concrete:['Concrete grey','#b4b0a7'],charcoal:['Charcoal','#41464
 const SEGS={
   clad:[['none','None'],['stone','Stone'],['brick','Brick'],['wood','Wood']],
   balfin:[['paint','Wall'],['accent','Accent'],['stone','Stone'],['wood','Wood']],
-  balcony:[['solid','Solid'],['glass','Glass'],['rail','MS rail']],
+  balcony:[['rail','Wall + MS rail'],['solid','Solid wall'],['glass','Glass']],
+  wallh:[['2','2 ft'],['3','3 ft']],
   win:[['chajja','Chajja'],['mould','Moulded'],['box','Box frame']],
   tile:[['red','Red tile'],['grey','Grey tile'],['none','None']],
   frame:[['white','White'],['black','Black'],['wood','Wood']]
 };
 const PRESETS={
-  built:{name:'As built',desc:'Site photos: off-white, red Mangalore tile, moulded window hoods',o:{wall:'offwhite',accent:'concrete',clad:'none',balfin:'paint',balcony:'solid',win:'mould',tile:'red',frame:'black',bay:false}},
-  drawing:{name:'As drawn',desc:'Submission elevation: plain walls, chajjas, no tile strip',o:{wall:'white',accent:'white',clad:'none',balfin:'paint',balcony:'solid',win:'chajja',tile:'none',frame:'white',bay:false}},
-  warm:{name:'Warm modern',desc:'Cream walls, stone base, wood balcony, framed bay',o:{wall:'cream',accent:'walnut',clad:'stone',balfin:'wood',balcony:'glass',win:'box',tile:'red',frame:'black',bay:true}},
-  grey:{name:'Contemporary',desc:'Grey and charcoal, brick base, MS railing, grey tile',o:{wall:'grey',accent:'charcoal',clad:'brick',balfin:'accent',balcony:'rail',win:'box',tile:'grey',frame:'black',bay:true}}
+  built:{name:'As built',desc:'Site photos: off-white, red tile strip, moulded hoods, 2 ft wall + MS railing',o:{wall:'offwhite',accent:'concrete',clad:'none',balfin:'paint',balcony:'rail',wallh:'2',win:'mould',tile:'red',frame:'black',bay:false}},
+  drawing:{name:'As drawn',desc:'Submission elevation: plain walls, chajjas, no tile strip',o:{wall:'white',accent:'white',clad:'none',balfin:'paint',balcony:'solid',wallh:'2',win:'chajja',tile:'none',frame:'white',bay:false}},
+  warm:{name:'Warm modern',desc:'Cream walls, stone base, wood balcony, framed bay',o:{wall:'cream',accent:'walnut',clad:'stone',balfin:'wood',balcony:'glass',wallh:'2',win:'box',tile:'red',frame:'black',bay:true}},
+  grey:{name:'Contemporary',desc:'Grey and charcoal, brick base, MS railing, grey tile',o:{wall:'grey',accent:'charcoal',clad:'brick',balfin:'accent',balcony:'rail',wallh:'2',win:'box',tile:'grey',frame:'black',bay:true}}
 };
 let O=Object.assign({},PRESETS.built.o,{nb:false,cw:true,sun:30});
 try{const s=JSON.parse(localStorage.getItem('villa3d-opts')||'null');if(s)Object.assign(O,s);}catch(e){}
@@ -275,7 +278,7 @@ const M={
   glass:std({color:0x10171b,roughness:.05,metalness:.4,envMap:envTex,envMapIntensity:.55}),
   frame:std({roughness:.5}), door:std({map:TX.wood,roughness:.6}),
   stone:std({map:TX.stone}), brick:std({map:TX.brick}), wood:std({map:TX.wood,roughness:.65}),
-  tile:std({map:TX.tile,roughness:.7}), steel:std({color:0x2b2f33,metalness:.6,roughness:.4}),
+  tile:std({map:TX.tile,roughness:.7}), steel:std({color:0x2a2522,metalness:.55,roughness:.45}), granite:std({color:0xb4ada2,roughness:.3}),
   rglass:new THREE.MeshStandardMaterial({color:0xaecdd6,transparent:true,opacity:.32,roughness:.05,metalness:.1,envMap:envTex,depthWrite:false}),
   grass:std({map:TX.grass}), asphalt:std({map:TX.asphalt}), pave:std({map:TX.pave}), kerb:std({color:0xb8b5ad}),
   trunk:std({color:0x5a4330}), leaf:std({color:0x4f6e34,flatShading:true}), leaf2:std({color:0x62803e,flatShading:true})
@@ -326,6 +329,30 @@ function fill(Rb,a,b,zs,zh,t,vo,inw,out){
     const [ka,kb]=V(-.05,-.022);const hx=t==='D'?(a+b)/2-.09:b-.12;Rb(hx,hx+.025,ka,kb,zs+1.0,zs+1.15,M.steel);
   }
 }
+// Guard wall height under the railing (2 ft or 3 ft), solid parapet 1.14 m as drawn, glass on a 0.3 m upstand
+const RAIL=0.91;
+const guardWall=()=>O.balcony==='solid'?1.14:O.balcony==='glass'?.3:(O.wallh==='3'?.91:.61);
+// Guard round the 4.80 x 1.51 m bay (balcony or terrace extension) whose floor is at zf
+function guard(zf,m){
+  const hw=guardWall(),cx0=.0575,cx1=4.7425,cy=-1.4525;
+  [[0,-1.51,4.8,-1.395,zf-SL],[0,-1.395,.115,0,zf],[4.685,-1.395,4.8,0,zf]].forEach(([a,b,c,d,z])=>box(a,b,c,d,z,zf+hw,m));
+  if(O.balcony==='solid'){
+    box(-.02,-1.53,4.82,-1.375,zf+hw,zf+hw+.05,M.coping);box(-.02,-1.375,.135,0,zf+hw,zf+hw+.05,M.coping);box(4.665,-1.375,4.82,0,zf+hw,zf+hw+.05,M.coping);
+    return;}
+  if(O.balcony==='glass'){
+    box(.02,-1.47,4.78,-1.45,zf+hw,zf+1.08,M.rglass,{noCast:true});box(.04,-1.45,.06,-.02,zf+hw,zf+1.08,M.rglass,{noCast:true});box(4.74,-1.45,4.76,-.02,zf+hw,zf+1.08,M.rglass,{noCast:true});
+    box(0,-1.49,4.8,-1.43,zf+1.08,zf+1.12,M.steel);return;}
+  // granite coping, 40 mm, overhanging both faces
+  box(-.04,-1.55,4.84,-1.355,zf+hw,zf+hw+.04,M.granite);box(-.04,-1.355,.155,0,zf+hw,zf+hw+.04,M.granite);box(4.645,-1.355,4.84,0,zf+hw,zf+hw+.04,M.granite);
+  const zb=zf+hw+.04;
+  // runs: [u0,u1,fixed,alongX]; posts at ends and at most 1.6 m apart, six horizontal angle bars, the top one wider
+  [[cx0,cx1,cy,true],[cy,-.04,cx0,false],[cy,-.04,cx1,false]].forEach(([u0,u1,c,ax])=>{
+    const B=(a0,a1,b0,b1,z0,z1)=>ax?box(a0,b0,a1,b1,z0,z1,M.steel):box(b0,a0,b1,a1,z0,z1,M.steel);
+    const n=Math.ceil((u1-u0)/1.6);
+    for(let i=0;i<=n;i++){const u=u0+(u1-u0)*i/n;B(u-.025,u+.025,c-.025,c+.025,zb,zb+RAIL);}
+    for(let k=1;k<=6;k++){const z=zb+RAIL*k/6,w=k===6?.03:.016;B(u0-.025,u1+.025,c-w,c+w,z-.02,z);}
+  });
+}
 const chajja=(a,b,y,dir,zh,m)=>box(a-.4,y,b+.4,y+dir*.45,zh,zh+.1,m||M.wall);
 
 /* ---------- Villa ---------- */
@@ -371,23 +398,9 @@ function buildVilla(){
   wall(.23,12.78,5.83,13.01,FF,f1,[[1.07,2.27,.99,2.21,'W'],[4.31,4.91,1.6,2.21,'V']],1);
   chajja(6.79,7.99,11.28,1,FF+2.21);chajja(1.07,2.27,13.01,1,FF+2.21);chajja(4.31,4.91,13.01,1,FF+2.21);
 
-  /* Front balcony 4.80 x 1.51 */
+  /* Front balcony 4.80 x 1.51, guard per the railing photo: low wall, stone coping, MS angle railing */
   box(0,-1.51,4.8,0,FF-SL,FF,M.wall);
-  const bf=fin[O.balfin]||M.wall;
-  if(O.balcony==='solid'){
-    box(0,-1.51,4.8,-1.39,FF-SL,FF+1.14,bf);box(0,-1.39,.12,0,FF,FF+1.14,bf);box(4.68,-1.39,4.8,0,FF,FF+1.14,bf);
-    box(-.02,-1.53,4.82,-1.37,FF+1.14,FF+1.19,M.coping);
-  }else{
-    box(0,-1.51,4.8,-1.39,FF-SL,FF+.3,bf);box(0,-1.39,.12,0,FF,FF+.3,bf);box(4.68,-1.39,4.8,0,FF,FF+.3,bf);
-    if(O.balcony==='glass'){
-      box(.02,-1.47,4.78,-1.45,FF+.3,FF+1.08,M.rglass,{noCast:true});box(.04,-1.45,.06,-.02,FF+.3,FF+1.08,M.rglass,{noCast:true});box(4.74,-1.45,4.76,-.02,FF+.3,FF+1.08,M.rglass,{noCast:true});
-      box(0,-1.49,4.8,-1.43,FF+1.08,FF+1.12,M.steel);
-    }else{
-      for(let x=.1;x<4.75;x+=.12)box(x,-1.47,x+.02,-1.45,FF+.3,FF+1.06,M.steel);
-      for(let y=-1.35;y<-.05;y+=.12){box(.05,y,.07,y+.02,FF+.3,FF+1.06,M.steel);box(4.73,y,4.75,y+.02,FF+.3,FF+1.06,M.steel);}
-      box(0,-1.5,4.8,-1.42,FF+1.06,FF+1.11,M.steel);box(0,-1.5,.08,0,FF+1.06,FF+1.11,M.steel);box(4.72,-1.5,4.8,0,FF+1.06,FF+1.11,M.steel);
-    }
-  }
+  guard(FF,fin[O.balfin]||M.wall);
 
   /* Ground floor cladding (feature) */
   const cl=fin[O.clad];
@@ -421,10 +434,10 @@ function buildVilla(){
   cp(9.03,-.02,9.19,4.08);cp(9.03,6.48,9.19,11.3);cp(5.97,11.14,9.19,11.3);cp(5.85,11.28,6.01,13.03);cp(-.02,12.87,6.01,13.03);cp(-.02,-.02,.14,13.03);cp(4.8,-.02,9.19,.14);
   // terrace extension over the balcony, same 4.80 x 1.51 m (site photos); its parapet faces take the accent
   box(0,-1.51,4.8,0,TR-SL,TR,M.wall);
-  box(0,-1.51,4.8,-1.395,TR-SL,P,M.accent);box(0,-1.395,t,0,TR-SL,P,M.accent);box(4.8-t,-1.395,4.8,0,TR-SL,P,M.accent);
-  cp(-.02,-1.53,4.82,-1.375);cp(-.02,-1.375,.135,0);cp(4.665,-1.375,4.82,0);
-  if(O.bay){box(0,-1.51,.2,-1.37,FF+1.14,TR-SL,M.accent);box(4.6,-1.51,4.8,-1.37,FF+1.14,TR-SL,M.accent);
-    box(0,-1.37,.2,0,FF+1.14,TR-SL,M.accent);box(4.6,-1.37,4.8,0,FF+1.14,TR-SL,M.accent);}
+  guard(TR,M.accent);
+  if(O.bay){const fz=FF+guardWall()+(O.balcony==='rail'?.04+RAIL:0);
+    box(0,-1.51,.2,-1.37,fz,TR-SL,M.accent);box(4.6,-1.51,4.8,-1.37,fz,TR-SL,M.accent);
+    box(0,-1.37,.2,0,fz,TR-SL,M.accent);box(4.6,-1.37,4.8,0,fz,TR-SL,M.accent);}
 
   /* Sloped tile strip over the right part */
   if(O.tile!=='none'){
@@ -529,7 +542,7 @@ function seg(id,key){const el=document.getElementById(id);
   el.innerHTML=SEGS[key].map(([k,n])=>`<input type="radio" name="${key}" id="${key}-${k}" value="${k}"><label for="${key}-${k}">${n}</label>`).join('');
   el.addEventListener('change',e=>{O[key]=e.target.value;changed(true);});}
 swatches('sw-wall',WALLS,'wall');swatches('sw-accent',ACCENTS,'accent');
-['clad','balfin','balcony','win','tile','frame'].forEach(k=>seg('seg-'+k,k));
+['clad','balfin','balcony','wallh','win','tile','frame'].forEach(k=>seg('seg-'+k,k));
 const pre=document.getElementById('presets');
 pre.innerHTML=Object.entries(PRESETS).map(([k,p])=>`<button class="preset" data-p="${k}" aria-pressed="false"><i><u style="background:${WALLS[p.o.wall][1]}"></u><u style="background:${ACCENTS[p.o.accent][1]}"></u></i><b>${p.name}</b><span>${p.desc}</span></button>`).join('');
 pre.addEventListener('click',e=>{const b=e.target.closest('.preset');if(!b)return;Object.assign(O,PRESETS[b.dataset.p].o);changed(true);});
@@ -546,7 +559,7 @@ function specText(){
     `Main walls: ${label(WALLS,O.wall)} (${WALLS[O.wall][1]})`,
     `Accent: ${label(ACCENTS,O.accent)} (${ACCENTS[O.accent][1]}) on terrace extension parapet, mumty slab${O.win==='box'?', window box frames':''}${O.bay?', balcony side fins':''}`,
     `Ground floor front cladding: ${segName('clad')}`,
-    `Balcony: ${segName('balcony')} guard, parapet finish ${segName('balfin').toLowerCase()}`,
+    `Balcony and terrace extension guard: ${O.balcony==='rail'?`${segName('wallh')} wall with stone coping + 3 ft MS angle railing (6 horizontal bars)`:segName('balcony').toLowerCase()}; balcony wall finish ${segName('balfin').toLowerCase()}`,
     `Right-hand front windows: ${segName('win')}`,
     `Roof tile strip: ${segName('tile')}`,
     `Window frames: ${segName('frame')}`
