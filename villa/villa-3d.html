@@ -120,7 +120,7 @@ dl.data dd{margin:0;text-align:right;font-variant-numeric:tabular-nums;font-weig
       <div class="row"><span class="lbl">Ground floor front cladding</span><div class="seg" id="seg-clad"></div></div>
       <div class="row"><span class="lbl">Balcony parapet finish</span><div class="seg" id="seg-balfin"></div></div>
       <div class="row"><span class="lbl">Balcony and terrace extension guard</span><div class="seg" id="seg-balcony"></div></div>
-      <div class="row"><span class="lbl">Wall under the railing (railing 3 ft above)</span><div class="seg" id="seg-wallh"></div></div>
+      <div class="row"><span class="lbl">Wall under the railing (railing 2 ft 6 in above)</span><div class="seg" id="seg-wallh"></div></div>
       <div class="row"><span class="lbl">Right-hand front windows</span><div class="seg" id="seg-win"></div></div>
       <div class="row"><span class="lbl">Sloped tile strip at roof</span><div class="seg" id="seg-tile"></div></div>
       <div class="row"><span class="lbl">Window frames</span><div class="seg" id="seg-frame"></div></div>
@@ -153,7 +153,7 @@ dl.data dd{margin:0;text-align:right;font-variant-numeric:tabular-nums;font-weig
         <dt>Parapet · mumty headroom</dt><dd>1.14 · 2.62 m</dd>
         <dt>Building height</dt><dd>10.16 m</dd>
         <dt>Front balcony + terrace extension</dt><dd>4.80 × 1.51 m</dd>
-        <dt>Balcony + extension guard</dt><dd>2 ft wall + 3 ft MS railing</dd>
+        <dt>Balcony + extension guard</dt><dd>2 ft wall + 2 ft 6 in MS railing, 4 bars</dd>
         <dt>Balcony window (first floor)</dt><dd>1.83 m (6 ft), 4 panes</dd>
       </dl>
       <p class="hint">Walls 230 mm outer, openings and sill/lintel levels (sill 0.99, lintel 2.21 m) as drawn. Plinth is modelled at 0.45 m; section X-X shows 0.76 m from road to ground level. From the site photos: terrace extension over the balcony, the 6 ft balcony window, and two tall glazed openings on the staircase side wall (estimated 1.75 m wide, sills 2.4 and 6.2 m). Interiors are not modelled.</p>
@@ -332,7 +332,7 @@ function fill(Rb,a,b,zs,zh,t,vo,inw,out){
   }
 }
 // Guard wall height under the railing (2 ft or 3 ft), solid parapet 1.14 m as drawn, glass on a 0.3 m upstand
-const RAIL=0.91;
+const RAIL=0.76;
 const guardWall=()=>O.balcony==='solid'?1.14:O.balcony==='glass'?.3:(O.wallh==='3'?.91:.61);
 // Guard round the 4.80 x 1.51 m bay (balcony or terrace extension) whose floor is at zf
 function guard(zf,m){
@@ -347,12 +347,12 @@ function guard(zf,m){
   // granite coping, 40 mm, overhanging both faces
   box(-.04,-1.55,4.84,-1.355,zf+hw,zf+hw+.04,M.granite);box(-.04,-1.355,.155,0,zf+hw,zf+hw+.04,M.granite);box(4.645,-1.355,4.84,0,zf+hw,zf+hw+.04,M.granite);
   const zb=zf+hw+.04;
-  // runs: [u0,u1,fixed,alongX]; posts at ends and at most 1.6 m apart, six horizontal angle bars, the top one wider
+  // runs: [u0,u1,fixed,alongX]; posts at ends and at most 1.6 m apart, four horizontal angle bars, the top one wider
   [[cx0,cx1,cy,true],[cy,-.04,cx0,false],[cy,-.04,cx1,false]].forEach(([u0,u1,c,ax])=>{
     const B=(a0,a1,b0,b1,z0,z1)=>ax?box(a0,b0,a1,b1,z0,z1,M.steel):box(b0,a0,b1,a1,z0,z1,M.steel);
     const n=Math.ceil((u1-u0)/1.6);
     for(let i=0;i<=n;i++){const u=u0+(u1-u0)*i/n;B(u-.025,u+.025,c-.025,c+.025,zb,zb+RAIL);}
-    for(let k=1;k<=6;k++){const z=zb+RAIL*k/6,w=k===6?.03:.016;B(u0-.025,u1+.025,c-w,c+w,z-.02,z);}
+    for(let k=1;k<=4;k++){const z=zb+RAIL*k/4,w=k===4?.03:.016;B(u0-.025,u1+.025,c-w,c+w,z-.02,z);}
   });
 }
 const chajja=(a,b,y,dir,zh,m)=>box(a-.4,y,b+.4,y+dir*.45,zh,zh+.1,m||M.wall);
@@ -561,7 +561,7 @@ function specText(){
     `Main walls: ${label(WALLS,O.wall)} (${WALLS[O.wall][1]})`,
     `Accent: ${label(ACCENTS,O.accent)} (${ACCENTS[O.accent][1]}) on terrace extension parapet, mumty slab${O.win==='box'?', window box frames':''}${O.bay?', balcony side fins':''}`,
     `Ground floor front cladding: ${segName('clad')}`,
-    `Balcony and terrace extension guard: ${O.balcony==='rail'?`${segName('wallh')} wall with stone coping + 3 ft MS angle railing (6 horizontal bars)`:segName('balcony').toLowerCase()}; balcony wall finish ${segName('balfin').toLowerCase()}`,
+    `Balcony and terrace extension guard: ${O.balcony==='rail'?`${segName('wallh')} wall with stone coping + 2 ft 6 in MS angle railing (4 horizontal bars)`:segName('balcony').toLowerCase()}; balcony wall finish ${segName('balfin').toLowerCase()}`,
     `Right-hand front windows: ${segName('win')}`,
     `Roof tile strip: ${segName('tile')}`,
     `Window frames: ${segName('frame')}`
