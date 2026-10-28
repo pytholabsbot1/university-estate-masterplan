@@ -112,7 +112,7 @@ dl.data dd{margin:0;text-align:right;font-variant-numeric:tabular-nums;font-weig
     <section class="group">
       <h2>Colour</h2>
       <div class="row"><span class="lbl">Main walls</span><div class="swatches" id="sw-wall"></div></div>
-      <div class="row"><span class="lbl">Accent (bands, balcony box, roof band)</span><div class="swatches" id="sw-accent"></div></div>
+      <div class="row"><span class="lbl">Accent (terrace extension, mumty slab, box frames)</span><div class="swatches" id="sw-accent"></div></div>
     </section>
 
     <section class="group">
@@ -123,7 +123,7 @@ dl.data dd{margin:0;text-align:right;font-variant-numeric:tabular-nums;font-weig
       <div class="row"><span class="lbl">Right-hand front windows</span><div class="seg" id="seg-win"></div></div>
       <div class="row"><span class="lbl">Sloped tile strip at roof</span><div class="seg" id="seg-tile"></div></div>
       <div class="row"><span class="lbl">Window frames</span><div class="seg" id="seg-frame"></div></div>
-      <label class="tog" for="t-bay"><input type="checkbox" id="t-bay"><span class="sw"></span>Frame the balcony bay up to the roof band</label>
+      <label class="tog" for="t-bay"><input type="checkbox" id="t-bay"><span class="sw"></span>Side fins between balcony and terrace extension</label>
     </section>
 
     <section class="group">
@@ -151,9 +151,10 @@ dl.data dd{margin:0;text-align:right;font-variant-numeric:tabular-nums;font-weig
         <dt>Floor to floor</dt><dd>3.66 m</dd>
         <dt>Parapet · mumty headroom</dt><dd>1.14 · 2.62 m</dd>
         <dt>Building height</dt><dd>10.16 m</dd>
-        <dt>Front balcony</dt><dd>4.80 × 1.51 m</dd>
+        <dt>Front balcony + terrace extension</dt><dd>4.80 × 1.51 m</dd>
+        <dt>Balcony window (first floor)</dt><dd>1.83 m (6 ft), 4 panes</dd>
       </dl>
-      <p class="hint">Walls 230 mm outer, openings and sill/lintel levels (sill 0.99, lintel 2.21 m) as drawn. Plinth is modelled at 0.45 m; section X-X shows 0.76 m from road to ground level. Interiors are not modelled.</p>
+      <p class="hint">Walls 230 mm outer, openings and sill/lintel levels (sill 0.99, lintel 2.21 m) as drawn. Plinth is modelled at 0.45 m; section X-X shows 0.76 m from road to ground level. From the site photos: terrace extension over the balcony, the 6 ft balcony window, and two tall glazed openings on the staircase side wall (estimated 1.75 m wide, sills 2.4 and 6.2 m). Interiors are not modelled.</p>
     </section>
   </aside>
 </div>
@@ -311,10 +312,11 @@ function fill(Rb,a,b,zs,zh,t,vo,inw,out){
   const vf=vo+inw*0.07,fd=0.07,fw=0.06,F=M.frame;
   const V=(d1,d2)=>[vf+inw*d1,vf+inw*d2];
   const [fa,fb]=V(-fd/2,fd/2);
-  if(t==='W'||t==='V'){
+  if(t==='W'||t==='V'||t==='G'){
     Rb(a,a+fw,fa,fb,zs,zh,F);Rb(b-fw,b,fa,fb,zs,zh,F);Rb(a,b,fa,fb,zs,zs+fw,F);Rb(a,b,fa,fb,zh-fw,zh,F);
-    if(b-a>1.0){const m=(a+b)/2;Rb(m-.03,m+.03,fa,fb,zs,zh,F);}
-    if(b-a>1.5){Rb(a,b,fa,fb,zs+(zh-zs)*0.72-.025,zs+(zh-zs)*0.72+.025,F);}
+    const np=b-a>1.7?4:b-a>1.0?2:1;
+    for(let i=1;i<np;i++){const m=a+(b-a)*i/np;Rb(m-.03,m+.03,fa,fb,zs,zh,F);}
+    if(t==='G'){const nt=Math.round((zh-zs)/1.0);for(let i=1;i<nt;i++){const z=zs+(zh-zs)*i/nt;Rb(a,b,fa,fb,z-.03,z+.03,F);}}
     const [ga,gb]=V(-.006,.006);Rb(a+fw,b-fw,ga,gb,zs+fw,zh-fw,M.glass);
     const [sa,sb]=[vo-inw*0.05,vo+inw*0.02];Rb(a-.05,b+.05,sa,sb,zs-.05,zs,M.sill);
   }else{ // doors: D double, d single
@@ -342,7 +344,7 @@ function buildVilla(){
   wall(.23,2.37,4.34,2.6,0,g1,[[.53,2.33,.99,2.21,'W'],[2.84,4.34,0,2.21,'D']],-1);
   wall(4.34,0,4.57,2.6,0,g1,[],-1);
   wall(4.57,0,9.17,.23,0,g1,[[5.95,7.75,.99,2.21,'W']],-1);
-  wall(8.94,.23,9.17,11.28,0,g1,[],1);
+  wall(8.94,.23,9.17,4.08,0,g1,[],1);wall(8.94,6.48,9.17,11.28,0,g1,[],1);
   wall(3.45,11.05,8.94,11.28,0,g1,[[4.13,4.73,1.6,2.21,'V'],[6.78,7.98,.99,2.21,'W']],1);
   wall(3.22,11.28,3.45,12.78,0,g1,[[11.77,12.67,0,2.21,'d']],1);
   wall(.23,12.78,3.45,13.01,0,g1,[[1.07,2.27,.99,2.21,'W']],1);
@@ -352,13 +354,18 @@ function buildVilla(){
   chajja(4.13,4.73,11.28,1,2.21);chajja(6.78,7.98,11.28,1,2.21);chajja(1.07,2.27,13.01,1,2.21);
 
   /* First floor slab */
-  box(0,0,9.17,11.28,FF-SL,FF,M.wall);box(0,11.28,5.99,13.01,FF-SL,FF,M.wall);
+  // stairwell (x 5.70-8.94, y 4.08-6.48) left open
+  box(0,0,9.17,4.08,FF-SL,FF,M.wall);box(0,6.48,9.17,11.28,FF-SL,FF,M.wall);box(0,4.08,5.7,6.48,FF-SL,FF,M.wall);box(0,11.28,5.99,13.01,FF-SL,FF,M.wall);
 
   /* First floor walls */
   const f1=TR-SL;
   wall(0,0,.23,13.01,FF,f1,[[4.61,5.21,1.61,2.21,'V'],[5.77,6.37,1.61,2.21,'V']],-1);
-  wall(.23,0,9.17,.23,FF,f1,[[.83,2.03,.99,2.21,'W'],[3.19,3.95,0,2.21,'d'],[6.0,7.8,.99,2.21,'W']],-1);
-  wall(8.94,.23,9.17,11.28,FF,f1,[],1);
+  wall(.23,0,9.17,.23,FF,f1,[[.52,2.35,.99,2.21,'W'],[3.19,3.95,0,2.21,'d'],[6.0,7.8,.99,2.21,'W']],-1);
+  wall(8.94,.23,9.17,4.08,FF,f1,[],1);wall(8.94,6.48,9.17,11.28,FF,f1,[],1);
+  // staircase side wall: one height from ground to mumty roof, two tall glazed openings (site photo)
+  // built in two height bands because wall() handles openings side by side, not stacked
+  wall(8.94,4.08,9.17,6.48,0,5.5,[[4.4,6.15,2.4,4.8,'G']],1);
+  wall(8.94,4.08,9.17,6.48,5.5,MUM_TOP-.22,[[4.4,6.15,.7,3.7,'G']],1);
   wall(5.99,11.05,8.94,11.28,FF,f1,[[6.79,7.99,.99,2.21,'W']],1);
   wall(5.83,11.28,5.99,13.01,FF,f1,[],1);
   wall(.23,12.78,5.83,13.01,FF,f1,[[1.07,2.27,.99,2.21,'W'],[4.31,4.91,1.6,2.21,'V']],1);
@@ -405,16 +412,17 @@ function buildVilla(){
   treat(5.95,7.75,0);treat(6.0,7.8,FF);
 
   /* Terrace slab, parapets, roof band */
-  box(0,0,9.17,11.28,TR-SL,TR,M.wall);box(0,11.28,5.99,13.01,TR-SL,TR,M.wall);
+  box(0,0,9.17,4.08,TR-SL,TR,M.wall);box(0,6.48,9.17,11.28,TR-SL,TR,M.wall);box(0,4.08,5.7,6.48,TR-SL,TR,M.wall);box(0,11.28,5.99,13.01,TR-SL,TR,M.wall);
   const P=PAR,t=.115;
-  box(9.055,0,9.17,11.28,TR,P,M.wall);box(5.99,11.165,9.17,11.28,TR,P,M.wall);box(5.875,11.28,5.99,13.01,TR,P,M.wall);
+  box(9.055,0,9.17,4.08,TR,P,M.wall);box(9.055,6.48,9.17,11.28,TR,P,M.wall);box(5.99,11.165,9.17,11.28,TR,P,M.wall);box(5.875,11.28,5.99,13.01,TR,P,M.wall);
   box(0,12.895,5.99,13.01,TR,P,M.wall);box(0,0,t,13.01,TR,P,M.wall);box(4.8,0,9.17,t,TR,P,M.wall);
   // coping
   const cp=(x0,y0,x1,y1)=>box(x0,y0,x1,y1,P,P+.05,M.coping);
-  cp(9.03,-.02,9.19,11.3);cp(5.97,11.14,9.19,11.3);cp(5.85,11.28,6.01,13.03);cp(-.02,12.87,6.01,13.03);cp(-.02,-.02,.14,13.03);cp(4.8,-.02,9.19,.14);
-  // left roof band (elevation shows it boxed from 7.17 to 8.46 over the balcony bay)
-  const by0=O.bay?-1.51:-.15;
-  box(0,by0,4.8,t,TR-SL,P,M.accent);box(-.02,by0-.02,4.82,t+.02,P,P+.05,M.coping);
+  cp(9.03,-.02,9.19,4.08);cp(9.03,6.48,9.19,11.3);cp(5.97,11.14,9.19,11.3);cp(5.85,11.28,6.01,13.03);cp(-.02,12.87,6.01,13.03);cp(-.02,-.02,.14,13.03);cp(4.8,-.02,9.19,.14);
+  // terrace extension over the balcony, same 4.80 x 1.51 m (site photos); its parapet faces take the accent
+  box(0,-1.51,4.8,0,TR-SL,TR,M.wall);
+  box(0,-1.51,4.8,-1.395,TR-SL,P,M.accent);box(0,-1.395,t,0,TR-SL,P,M.accent);box(4.8-t,-1.395,4.8,0,TR-SL,P,M.accent);
+  cp(-.02,-1.53,4.82,-1.375);cp(-.02,-1.375,.135,0);cp(4.665,-1.375,4.82,0);
   if(O.bay){box(0,-1.51,.2,-1.37,FF+1.14,TR-SL,M.accent);box(4.6,-1.51,4.8,-1.37,FF+1.14,TR-SL,M.accent);
     box(0,-1.37,.2,0,FF+1.14,TR-SL,M.accent);box(4.6,-1.37,4.8,0,FF+1.14,TR-SL,M.accent);}
 
@@ -435,10 +443,9 @@ function buildVilla(){
   const mz=TR, mt=MUM_TOP-.22;
   wall(4.54,3.85,9.17,4.08,mz,mt,[],-1);
   wall(4.54,6.48,9.17,6.71,mz,mt,[],1);
-  wall(8.94,4.08,9.17,6.48,mz,mt,[],1);
   wall(4.54,4.08,4.74,6.48,mz,mt,[[4.08,5.15,0,2.13,'d']],-1);
   box(4.44,3.75,9.27,6.81,mt,MUM_TOP,M.accent);
-  box(4.09,3.85,4.54,5.6,mz+2.3,mz+2.4,M.wall);
+  box(4.09,3.85,4.54,5.6,mz+2.2,mz+2.32,M.wall);
 }
 
 /* ---------- Plot: lawn, path, compound wall, trees ---------- */
@@ -537,7 +544,7 @@ const segName=(key)=>SEGS[key].find(s=>s[0]===O[key])[1];
 function specText(){
   return [
     `Main walls: ${label(WALLS,O.wall)} (${WALLS[O.wall][1]})`,
-    `Accent: ${label(ACCENTS,O.accent)} (${ACCENTS[O.accent][1]}) on roof band, mumty slab${O.win==='box'?', window box frames':''}${O.bay?', balcony bay frame':''}`,
+    `Accent: ${label(ACCENTS,O.accent)} (${ACCENTS[O.accent][1]}) on terrace extension parapet, mumty slab${O.win==='box'?', window box frames':''}${O.bay?', balcony side fins':''}`,
     `Ground floor front cladding: ${segName('clad')}`,
     `Balcony: ${segName('balcony')} guard, parapet finish ${segName('balfin').toLowerCase()}`,
     `Right-hand front windows: ${segName('win')}`,
