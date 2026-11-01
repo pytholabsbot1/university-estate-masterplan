@@ -1,5 +1,16 @@
 # 5BHK duplex villa: 3D elevation study
 
+## Contents
+
+- `villa-3d.html`: interactive 3D model.
+- `source/5bhk_Duplex_villa_modified_submission_plan.dwg`: the original submission drawing, as received.
+- `source/5bhk_Duplex_villa_modified_submission_plan.dxf`: the same sheet as DXF (R2013, metres). It was rebuilt from the DWG: lines, polylines, arcs, circles and texts, including dimension graphics, on the original layers. Hatches, leaders and the tree and door-swing blocks are not included. Walls sit on layer `WALL`, because their layer was unreadable in the DWG.
+- `source/photos/`: site photos (front, staircase side) and the railing reference.
+- `drawings/as-drawn/`: ground floor, first floor and terrace plans, and a full-sheet preview, extracted unchanged from the DWG. They do not show the changes listed below.
+- `tools/`: scripts used for the extraction. `extract.py` reads LibreDWG's JSON (`dwgread -O JSON`), `render.py` draws a region to SVG and `todxf.py` writes the DXF (needs `ezdxf`).
+
+## 3D model
+
 `villa-3d.html` is an interactive 3D model of the G+1 duplex villa, for choosing the final elevation. Open it in a browser (it loads three.js r128 from a CDN).
 
 Source: `5bhk_Duplex_villa_modified_submission_plan.dwg` (AutoCAD 2013 DWG format), converted with LibreDWG 0.13.3. Wall, opening and level coordinates were read from the converted file and typed into the page.
